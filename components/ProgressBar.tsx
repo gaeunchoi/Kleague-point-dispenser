@@ -5,7 +5,7 @@ export type ProgressBarProps = {
   title: string;
   value: number;
   max: number;
-  showUnit?: "percent" | "score";
+  showUnit?: "percent" | "score" | "goal";
 };
 
 function ProgressBar({ color, title, value, max, showUnit }: ProgressBarProps) {
@@ -14,6 +14,7 @@ function ProgressBar({ color, title, value, max, showUnit }: ProgressBarProps) {
   const displayValueWithUnit = () => {
     if (showUnit === "percent") return `${percentage}%`;
     if (showUnit === "score") return `${value}점`;
+    if (showUnit === "goal") return `${value}골`;
     return `${value}`;
   };
 
@@ -22,7 +23,7 @@ function ProgressBar({ color, title, value, max, showUnit }: ProgressBarProps) {
       <StatsInfo title={title} displayValue={displayValueWithUnit()} />
       <div className="h-2 w-full rounded-full bg-gray-300 overflow-hidden">
         <div
-          className={`h-full ${color}`}
+          className={`h-full rounded-full ${color}`}
           style={{ width: `${percentage}%` }}
         ></div>
       </div>
