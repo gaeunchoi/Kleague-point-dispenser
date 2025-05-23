@@ -27,17 +27,17 @@ function TeamMainStats() {
       <CardSection
         title={<h3 className="text-xl font-bold text-gray-900">매직 넘버</h3>}
       >
-        <div className="flex flex-row gap-6 items-center place-content-between">
+        <div className="flex flex-row gap-1 items-center place-content-between">
           <div className="rounded-full text-xl bg-blue-400 min-w-20 min-h-20 flex flex-col items-center justify-center">
             <div className="text-sm">M.N</div>
             <div className="text-white font-bold">28</div>
           </div>
           <div className="flex flex-col gap-2 items-center">
-            <span className="text-gray-600">남은 경기</span>
+            <span className="text-sm text-gray-600">남은 경기</span>
             <span className="text-xl font-bold">16</span>
           </div>
           <div className="flex flex-col gap-2 items-center">
-            <span className="text-gray-600">현재 순위</span>
+            <span className="text-sm text-gray-600">현재 순위</span>
             <span className="text-xl font-bold">2위</span>
           </div>
         </div>
