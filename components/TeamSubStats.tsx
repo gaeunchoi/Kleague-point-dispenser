@@ -1,14 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import LeagueRanks from "./LeagueRanks";
 import TeamStatistics from "./TeamStatistics";
 import PythagoreanAnalysis from "./PythagoreanAnalysis";
+import TotalLeagueRank from "./TotalLeagueRank";
 
 function TeamSubStats() {
   const tabs: string[] = ["리그 순위", "팀 통계", "피타고리안 분석"];
   const contents = [
-    <LeagueRanks key={0} />,
+    <TotalLeagueRank key={0} />,
     <TeamStatistics key={1} />,
     <PythagoreanAnalysis key={2} />,
   ];
