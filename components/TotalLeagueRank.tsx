@@ -1,9 +1,10 @@
 import LeagueLegend from "./LeagueLegend";
 import LeagueRanks from "./LeagueRanks";
+import { cn } from "@/utils/cn";
 
 function TotalLeagueRank() {
   return (
-    <div className="overflow-x-scroll">
+    <div className={cn("overflow-x-scroll")}>
       <LeagueRanks />
       <LeagueLegend />
     </div>
