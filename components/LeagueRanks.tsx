@@ -6,7 +6,7 @@ import { useLeagueStore } from "@/store/leagueStore";
 
 function LeagueRanks() {
   const { data, isLoading, fetchData } = useLeagueStore();
-  const suwon = "수원";
+  const myTeam = "수원";
 
   useEffect(() => {
     fetchData();
@@ -38,7 +38,7 @@ function LeagueRanks() {
           <tr
             key={team.rank}
             className={`hover:bg-gray-100 border-b-gray-100 ${
-              team.teamName === suwon
+              team.teamName === myTeam
                 ? "bg-blue-100 font-bold"
                 : "bg-transparent"
             }`}

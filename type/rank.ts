@@ -1,4 +1,5 @@
 export interface Rank {
+  leagueId: number;
   rank: number;
   teamName: string;
   gameCnt: number;

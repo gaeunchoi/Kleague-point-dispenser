@@ -10,7 +10,8 @@ export const GET = async () => {
     const teamRank = res.data?.data?.teamRank;
 
     const leagueRankInfo: Rank[] = teamRank.map((team: any) => ({
-      rank: Number(team.rank),
+      leagueId: team.leagueId,
+      rank: team.rank,
       teamName: team.teamName,
       gameCnt: team.gameCount,
       winCnt: team.winCnt,

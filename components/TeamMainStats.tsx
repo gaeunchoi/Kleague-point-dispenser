@@ -1,8 +1,14 @@
+"use client";
+import { useLeagueStore } from "@/store/leagueStore";
 import CardSection from "./CardSection";
 import ProgressBar from "./ProgressBar";
 import StatsInfo from "./StatsInfo";
 
 function TeamMainStats() {
+  const myTeam = useLeagueStore((state) =>
+    state.data.find((team) => team.teamName === "수원")
+  );
+
   return (
     <div className="grid sm:grid-cols-1 md:grid-cols-3 gap-4">
       <CardSection
@@ -34,11 +40,19 @@ function TeamMainStats() {
           </div>
           <div className="flex flex-col gap-2 items-center">
             <span className="text-sm text-gray-600">남은 경기</span>
-            <span className="text-xl font-bold">16</span>
+            {typeof myTeam?.gameCnt === "number" ? (
+              <span className="text-xl font-bold">{42 - myTeam.gameCnt}</span>
+            ) : (
+              <span className="text-xl font-bold">-</span>
+            )}
           </div>
           <div className="flex flex-col gap-2 items-center">
             <span className="text-sm text-gray-600">현재 순위</span>
-            <span className="text-xl font-bold">2위</span>
+            {typeof myTeam?.rank === "number" ? (
+              <span className="text-xl font-bold">{myTeam.rank}위</span>
+            ) : (
+              <span className="text-xl font-bold">-위</span>
+            )}
           </div>
         </div>
       </CardSection>
@@ -49,18 +63,23 @@ function TeamMainStats() {
         <ProgressBar
           color="bg-[#0066b3]"
           title="득점"
-          value={35}
-          max={53}
+          value={myTeam?.gainGoal ?? 0}
+          max={(myTeam?.gainGoal ?? 0) + (myTeam?.lossGoal ?? 0)}
           showUnit="score"
         />
         <ProgressBar
           color="bg-[#e60012]"
           title="실점"
-          value={18}
-          max={53}
+          value={myTeam?.lossGoal ?? 0}
+          max={(myTeam?.gainGoal ?? 0) + (myTeam?.lossGoal ?? 0)}
           showUnit="score"
         />
-        <StatsInfo title="득실차" displayValue="+17" />
+        <StatsInfo
+          title="득실차"
+          displayValue={`${
+            (myTeam?.gainGoal ?? 0) - (myTeam?.lossGoal ?? 0) >= 0 ? "+" : ""
+          }${(myTeam?.gainGoal ?? 0) - (myTeam?.lossGoal ?? 0)}`}
+        />
       </CardSection>
     </div>
   );
