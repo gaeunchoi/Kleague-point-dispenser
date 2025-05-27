@@ -1,10 +1,18 @@
 "use client";
-import mockData from "@/data/mock";
 import TeamLogos from "../data/teamLogo";
+import { useEffect, useState } from "react";
+import { Rank } from "@/type/rank";
+import { useLeagueStore } from "@/store/leagueStore";
 
 function LeagueRanks() {
+  const { data, isLoading, fetchData } = useLeagueStore();
   const suwon = "수원";
 
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  if (isLoading) return <div>로딩중입니다</div>;
   return (
     <table className="w-full text-nowrap">
       <thead className="bg-gray-200">
@@ -26,7 +34,7 @@ function LeagueRanks() {
         </tr>
       </thead>
       <tbody>
-        {mockData.map((team) => (
+        {data.map((team) => (
           <tr
             key={team.rank}
             className={`hover:bg-gray-100 border-b-gray-100 ${
@@ -69,20 +77,20 @@ function LeagueRanks() {
                 {team.teamName}
               </div>
             </td>
-            <td className="text-center px-4 align-middle">{team.totalGame}</td>
+            <td className="text-center px-4 align-middle">{team.gameCnt}</td>
             <td className="text-center px-4 align-middle">{team.winCnt}</td>
-            <td className="text-center px-4 align-middle">{team.drawCnt}</td>
-            <td className="text-center px-4 align-middle">{team.loseCnt}</td>
-            <td className="text-center px-4 align-middle">{team.score}</td>
-            <td className="text-center px-4 align-middle">{team.conceded}</td>
+            <td className="text-center px-4 align-middle">{team.tieCnt}</td>
+            <td className="text-center px-4 align-middle">{team.lossCnt}</td>
+            <td className="text-center px-4 align-middle">{team.gainGoal}</td>
+            <td className="text-center px-4 align-middle">{team.lossGoal}</td>
             <td
               className={`text-center px-4 align-middle ${
-                team.goalDiff >= 0 ? "text-green-800" : "text-red-500"
+                team.gapGoal >= 0 ? "text-green-800" : "text-red-500"
               }`}
             >
-              {team.goalDiff > 0 ? `+${team.goalDiff}` : team.goalDiff}
+              {team.gapGoal > 0 ? `+${team.gapGoal}` : team.gapGoal}
             </td>
-            <td className="text-center px-4 align-middle">{team.points}</td>
+            <td className="text-center px-4 align-middle">{team.gainPoint}</td>
           </tr>
         ))}
       </tbody>

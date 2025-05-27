@@ -1,12 +1,12 @@
 export interface Rank {
   rank: number;
   teamName: string;
-  totalGame: number;
+  gameCnt: number;
   winCnt: number;
-  drawCnt: number;
-  loseCnt: number;
-  score: number;
-  conceded: number;
-  goalDiff: number;
-  points: number;
+  tieCnt: number;
+  lossCnt: number;
+  gainGoal: number;
+  lossGoal: number;
+  gapGoal: number;
+  gainPoint: number;
 }

@@ -1,12 +1,12 @@
 import { Rank } from "@/type/rank";
 import ProgressBar from "./ProgressBar";
-import mockData from "@/data/mock";
 import CardSection from "./CardSection";
 import StatsInfo from "./StatsInfo";
+import { useLeagueStore } from "@/store/leagueStore";
 
 function TeamStatistics() {
-  const suwonData: Rank | undefined = mockData.find(
-    (data) => data.teamName === "수원"
+  const suwonData = useLeagueStore((state) =>
+    state.data.find((team) => team.teamName === "수원")
   );
 
   return (
@@ -17,31 +17,31 @@ function TeamStatistics() {
             title="승"
             color="bg-[#0066b3]"
             value={suwonData?.winCnt ?? 0}
-            max={suwonData?.totalGame ?? 0}
+            max={suwonData?.gameCnt ?? 0}
           />
         </CardSection>
         <CardSection>
           <ProgressBar
             title="무"
             color="bg-gray-500"
-            value={suwonData?.loseCnt ?? 0}
-            max={suwonData?.totalGame ?? 0}
+            value={suwonData?.tieCnt ?? 0}
+            max={suwonData?.gameCnt ?? 0}
           />
         </CardSection>
         <CardSection>
           <ProgressBar
             title="패"
             color="bg-[#e60012]"
-            value={suwonData?.loseCnt ?? 0}
-            max={suwonData?.totalGame ?? 0}
+            value={suwonData?.lossCnt ?? 0}
+            max={suwonData?.gameCnt ?? 0}
           />
         </CardSection>
         <CardSection>
           <ProgressBar
             title="승점"
             color="bg-black"
-            value={suwonData?.score ?? 0}
-            max={(suwonData?.totalGame ?? 0) * 3}
+            value={suwonData?.gainGoal ?? 0}
+            max={(suwonData?.gameCnt ?? 0) * 3}
           />
         </CardSection>
       </div>
@@ -51,17 +51,17 @@ function TeamStatistics() {
         >
           <StatsInfo
             title="총 득점"
-            displayValue={`${suwonData?.score ?? 0}골`}
+            displayValue={`${suwonData?.gainGoal ?? 0}골`}
           />
           <ProgressBar
             title="경기당 득점"
             color="bg-[#0066b3]"
             value={
               Math.floor(
-                ((suwonData?.score ?? 0) / (suwonData?.totalGame ?? 0)) * 100
+                ((suwonData?.gainGoal ?? 0) / (suwonData?.gameCnt ?? 0)) * 100
               ) / 100
             }
-            max={suwonData?.totalGame ?? 0}
+            max={suwonData?.gameCnt ?? 0}
             showUnit="goal"
           />
         </CardSection>
@@ -70,17 +70,17 @@ function TeamStatistics() {
         >
           <StatsInfo
             title="총 실점"
-            displayValue={`${suwonData?.conceded ?? 0}골`}
+            displayValue={`${suwonData?.lossGoal ?? 0}골`}
           />
           <ProgressBar
             title="경기당 실점"
             color="bg-[#e60012]"
             value={
               Math.floor(
-                ((suwonData?.conceded ?? 0) / (suwonData?.totalGame ?? 0)) * 100
+                ((suwonData?.lossGoal ?? 0) / (suwonData?.gameCnt ?? 0)) * 100
               ) / 100
             }
-            max={suwonData?.totalGame ?? 0}
+            max={suwonData?.gameCnt ?? 0}
             showUnit="goal"
           />
         </CardSection>
