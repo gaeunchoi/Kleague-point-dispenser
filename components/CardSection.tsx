@@ -1,3 +1,4 @@
+import { cn } from "@/utils/cn";
 import { ReactNode } from "react";
 
 function CardSection({
@@ -8,7 +9,7 @@ function CardSection({
   children: ReactNode;
 }) {
   return (
-    <div className="bg-white rounded-2xl p-5 space-y-6">
+    <div className={cn("bg-white", "rounded-2xl", "p-5", "space-y-6")}>
       {title}
       {children}
     </div>

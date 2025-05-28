@@ -25,7 +25,13 @@ export const xlLabel = (...args: ClassValue[]) =>
 
 // Flex
 export const flexRow = (...args: ClassValue[]) =>
-  cn("flex", "flex-row", "items-center", "gap-2", ...args);
+  cn("flex", "flex-row", "gap-2", ...args);
 
 export const flexCol = (...args: ClassValue[]) =>
+  cn("flex", "flex-col", "gap-2", ...args);
+
+export const flexRowCenter = (...args: ClassValue[]) =>
+  cn("flex", "flex-row", "items-center", "gap-2", ...args);
+
+export const flexColCenter = (...args: ClassValue[]) =>
   cn("flex", "flex-col", "items-center", "gap-2", ...args);

@@ -1,3 +1,4 @@
+import { cn } from "@/utils/cn";
 import StatsInfo from "./StatsInfo";
 
 export type ProgressBarProps = {
@@ -21,9 +22,17 @@ function ProgressBar({ color, title, value, max, showUnit }: ProgressBarProps) {
   return (
     <>
       <StatsInfo title={title} displayValue={displayValueWithUnit()} />
-      <div className="h-2 w-full rounded-full bg-gray-300 overflow-hidden">
+      <div
+        className={cn(
+          "h-2",
+          "w-full",
+          "rounded-full",
+          "bg-gray-300",
+          "overflow-hidden"
+        )}
+      >
         <div
-          className={`h-full rounded-full ${color}`}
+          className={cn("h-full", "rounded-full", color)}
           style={{ width: `${percentage}%` }}
         ></div>
       </div>

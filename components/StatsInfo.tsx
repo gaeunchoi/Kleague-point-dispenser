@@ -1,3 +1,5 @@
+import { flexRow, smLabel, xlLabel } from "./styles";
+
 type StatsInfoProps = {
   title: string;
   displayValue: string;
@@ -5,9 +7,9 @@ type StatsInfoProps = {
 
 function StatsInfo({ title, displayValue }: StatsInfoProps) {
   return (
-    <div className="flex flex-row place-content-between mb-3">
-      <span className="text-sm text-gray-600">{title}</span>
-      <span className="text-xl font-bold">{displayValue}</span>
+    <div className={flexRow("place-content-between", "mb-3")}>
+      <span className={smLabel()}>{title}</span>
+      <span className={xlLabel()}>{displayValue}</span>
     </div>
   );
 }

@@ -5,18 +5,25 @@ import ProgressBar from "./ProgressBar";
 import StatsInfo from "./StatsInfo";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { cn } from "@/utils/cn";
+import { smLabel, xlLabel, flexRowCenter, flexColCenter } from "./styles";
 
 function TeamMainStats() {
   const { data, isLoading } = useLeagueStore();
   const myTeam = data.find((team) => team.teamName === "수원");
 
   return (
-    <div className="grid sm:grid-cols-1 md:grid-cols-3 gap-3">
+    <div className={cn("grid", "sm:grid-cols-1", "md:grid-cols-3", "gap-3")}>
       <CardSection
-        title={<h3 className="text-xl font-bold text-gray-900">승격 확률</h3>}
+        title={<h3 className={xlLabel("text-gray-900")}>승격 확률</h3>}
       >
         {isLoading ? (
-          <Skeleton height={48} count={2} borderRadius={12} className="mb-4" />
+          <Skeleton
+            height={48}
+            count={2}
+            borderRadius={12}
+            className={cn("mb-4")}
+          />
         ) : (
           <>
             <ProgressBar
@@ -38,44 +45,53 @@ function TeamMainStats() {
       </CardSection>
 
       <CardSection
-        title={<h3 className="text-xl font-bold text-gray-900">매직 넘버</h3>}
+        title={<h3 className={xlLabel("text-gray-900")}>매직 넘버</h3>}
       >
-        <div className="flex flex-row gap-1 items-center place-content-between">
-          <div className="min-w-20 min-h-20 flex flex-col items-center justify-center">
+        <div className={flexRowCenter("gap-1", "place-content-between")}>
+          <div
+            className={flexColCenter("min-w-20", "min-h-20", "justify-center")}
+          >
             {isLoading ? (
               <Skeleton circle width={80} height={80} />
             ) : (
-              <div className="rounded-full text-xl bg-blue-400 w-20 h-20 flex flex-col items-center justify-center">
-                <div className="text-sm text-white">M.N</div>
-                <div className="text-white font-bold text-lg">28</div>
+              <div
+                className={flexColCenter(
+                  "justify-center",
+                  "w-20",
+                  "h-20",
+                  "bg-blue-400",
+                  "text-xl",
+                  "rounded-full"
+                )}
+              >
+                <div className={smLabel("text-white")}>M.N</div>
+                <div className={xlLabel("text-white")}>28</div>
               </div>
             )}
           </div>
 
-          <div className="flex flex-col gap-2 items-center min-w-[60px]">
-            <span className="text-sm text-gray-600">남은 경기</span>
+          <div className={flexColCenter("min-w-[60px]")}>
+            <span className={smLabel()}>남은 경기</span>
             {isLoading ? (
               <Skeleton width={40} height={28} borderRadius={8} />
             ) : (
-              <span className="text-xl font-bold">
-                {42 - (myTeam?.gameCnt ?? 0)}
-              </span>
+              <span className={xlLabel()}>{42 - (myTeam?.gameCnt ?? 0)}</span>
             )}
           </div>
 
-          <div className="flex flex-col gap-2 items-center min-w-[60px]">
-            <span className="text-sm text-gray-600">현재 순위</span>
+          <div className={flexColCenter("min-w-[60px]")}>
+            <span className={smLabel()}>현재 순위</span>
             {isLoading ? (
               <Skeleton width={40} height={28} borderRadius={8} />
             ) : (
-              <span className="text-xl font-bold">{myTeam?.rank ?? "-"}위</span>
+              <span className={xlLabel()}>{myTeam?.rank ?? "-"}위</span>
             )}
           </div>
         </div>
       </CardSection>
 
       <CardSection
-        title={<h3 className="text-xl font-bold text-gray-900">득실 현황</h3>}
+        title={<h3 className={xlLabel("text-gray-900")}>득실 현황</h3>}
       >
         {isLoading ? (
           <>

@@ -5,8 +5,7 @@ import { useLeagueStore } from "@/store/leagueStore";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { cn } from "@/utils/cn";
-import { thClass, tdClass } from "@/utils/tableClass";
-import { flexRow } from "@/utils/flexClass";
+import { thClass, tdClass, flexRowCenter } from "./styles";
 
 function LeagueRanks() {
   const { data, isLoading, fetchData } = useLeagueStore();
@@ -56,7 +55,9 @@ function LeagueRanks() {
                   "hover:bg-gray-100",
                   "border-b",
                   "border-gray-100",
-                  team.teamName === myTeam && "bg-blue-100 font-bold"
+                  {
+                    "bg-blue-100 font-bold": team.teamName === myTeam,
+                  }
                 )}
               >
                 <td className={tdClass("relative")}>
@@ -96,7 +97,7 @@ function LeagueRanks() {
                   </span>
                 </td>
                 <td className={tdClass()}>
-                  <div className={flexRow("justify-start", "gap-3")}>
+                  <div className={flexRowCenter("justify-start", "gap-3")}>
                     <img
                       src={TeamLogos[team.teamName]}
                       alt={team.teamName}
