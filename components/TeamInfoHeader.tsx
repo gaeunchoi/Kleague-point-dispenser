@@ -33,7 +33,7 @@ function TeamInfoHeader() {
               <Skeleton circle width={50} height={50} className="mr-2" />
             </div>
 
-            <div className={flexCol("gap-3", "w-[200px]")}>
+            <div className={flexCol("gap-2", "w-[200px]")}>
               <Skeleton height={24} borderRadius={12} />
               <Skeleton height={20} width="62px" borderRadius={12} />
             </div>
