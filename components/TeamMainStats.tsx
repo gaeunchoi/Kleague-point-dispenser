@@ -7,36 +7,81 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { cn } from "@/utils/cn";
 import { smLabel, xlLabel, flexRowCenter, flexColCenter } from "./styles";
+import { useEffect, useState } from "react";
+import { ClipLoader } from "react-spinners";
 
 function TeamMainStats() {
+  const [promotionResult, setPromotionResult] = useState<{
+    win: number;
+    playoff: number;
+  } | null>(null);
   const { data, isLoading } = useLeagueStore();
   const myTeam = data.find((team) => team.teamName === "수원");
+  const [isSimulating, setIsSimulating] = useState(false);
+
+  const runSimulation = async () => {
+    if (!myTeam || data.length === 0) return;
+
+    setIsSimulating(true);
+    try {
+      const remainingGames = 42 - (myTeam?.gameCnt ?? 0);
+      const simulations = 15000;
+
+      const res = await fetch("/api/simulateLeague", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          leagueData: data,
+          remainingGames,
+          simulations,
+          leagueType: `k${myTeam.leagueId}`,
+        }),
+      });
+
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.error || "시뮬레이션 실패");
+      }
+
+      const result = await res.json();
+
+      if (myTeam) {
+        const myResult = result[myTeam.teamName]; // 예: { win: 82.3, playoff: 68.1 }
+        setPromotionResult(myResult);
+      }
+    } catch (err) {
+      console.error("🚨 runSimulation 에러 발생: ", err);
+    } finally {
+      setIsSimulating(false);
+    }
+  };
+
+  useEffect(() => {
+    if (!isLoading && data.length > 0) runSimulation();
+  }, [isLoading, data]);
 
   return (
     <div className={cn("grid", "sm:grid-cols-1", "md:grid-cols-3", "gap-3")}>
       <CardSection
         title={<h3 className={xlLabel("text-gray-900")}>승격 확률</h3>}
       >
-        {isLoading ? (
-          <Skeleton
-            height={48}
-            count={2}
-            borderRadius={12}
-            className={cn("mb-4")}
-          />
+        {isSimulating ? (
+          <div className={flexRowCenter("justify-center", "h-[150px]")}>
+            <ClipLoader color="#0066b3" size={48} />
+          </div>
         ) : (
           <>
             <ProgressBar
               color="bg-[#0066b3]"
               title="다이렉트 승격"
-              value={82}
+              value={promotionResult?.win ?? 0}
               max={100}
               showUnit="percent"
             />
             <ProgressBar
               color="bg-[#e60012]"
               title="플레이오프 진출"
-              value={68.5}
+              value={promotionResult?.playoff ?? 0}
               max={100}
               showUnit="percent"
             />
