@@ -1,3 +1,4 @@
+"use client";
 import { useLeagueStore } from "@/store/leagueStore";
 import { useSearchParams } from "next/navigation";
 import SubStatsLoading from "./SubStatsLoading";
