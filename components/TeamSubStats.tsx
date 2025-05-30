@@ -7,7 +7,6 @@ import { cn } from "@/utils/cn";
 
 function TeamSubStats() {
   const tabs: string[] = ["리그 순위", "팀 통계"];
-  const contents = [<TotalLeagueRank key={0} />, <TeamStatistics key={1} />];
   const [activeTab, setActiveTab] = useState(0);
 
   return (
@@ -32,7 +31,7 @@ function TeamSubStats() {
         ))}
       </div>
       <div className={cn("w-full", "overflow-x-auto")}>
-        {contents[activeTab]}
+        <TeamStatistics />
       </div>
     </div>
   );

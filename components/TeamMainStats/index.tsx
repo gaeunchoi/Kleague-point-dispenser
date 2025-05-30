@@ -2,24 +2,31 @@
 import { useLeagueStore } from "@/store/leagueStore";
 import CardSection from "../CardSection";
 import { cn } from "@/utils/cn";
-import { xlLabel, flexRowCenter } from "../styles";
+import { xlLabel } from "../styles";
 import { useEffect, useState } from "react";
 import ProbabilitySection from "./ProbabilitySection";
 import GoalStatsSection from "./GoalStatsSection";
 import MagicNumberSection from "./MagicNumberSection";
 import "react-loading-skeleton/dist/skeleton.css";
+import { useSearchParams } from "next/navigation";
 
 function TeamMainStats() {
+  const { curLeagueData, isLoading, leagueId } = useLeagueStore();
+  const searchParams = useSearchParams();
   const [promotionResult, setPromotionResult] = useState<{
     win: number;
     playoff: number;
   } | null>(null);
-  const { data, isLoading } = useLeagueStore();
-  const myTeam = data.find((team) => team.teamName === "수원");
   const [isSimulating, setIsSimulating] = useState(false);
 
+  const curTeamName = searchParams.get("teamName");
+  const myTeam = curLeagueData.find((team) => team.teamName === curTeamName);
+
+  console.log(curLeagueData);
+  console.log(myTeam);
+
   const runSimulation = async () => {
-    if (!myTeam || data.length === 0) return;
+    if (!myTeam || curLeagueData.length === 0) return;
 
     setIsSimulating(true);
     try {
@@ -30,10 +37,10 @@ function TeamMainStats() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          leagueData: data,
+          leagueData: curLeagueData,
           remainingGames,
           simulations,
-          leagueType: `k${myTeam.leagueId}`,
+          leagueType: leagueId,
         }),
       });
 
@@ -56,8 +63,8 @@ function TeamMainStats() {
   };
 
   useEffect(() => {
-    if (!isLoading && data.length > 0) runSimulation();
-  }, [isLoading, data]);
+    if (!isLoading && curLeagueData.length > 0) runSimulation();
+  }, [isLoading, curLeagueData]);
 
   return (
     <div className={cn("grid", "sm:grid-cols-1", "md:grid-cols-3", "gap-3")}>

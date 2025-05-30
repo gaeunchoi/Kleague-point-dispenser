@@ -11,10 +11,14 @@ import {
   smLabel,
   xlLabel,
 } from "./styles";
+import { useSearchParams } from "next/navigation";
 
 function TeamInfoHeader() {
-  const { data, isLoading } = useLeagueStore();
-  const myTeam = data.find((team) => team.teamName === "수원");
+  const searchParams = useSearchParams();
+  const curTeamName = searchParams.get("teamName");
+
+  const { curLeagueData, isLoading, leagueId } = useLeagueStore();
+  const myTeam = curLeagueData.find((team) => team.teamName === curTeamName);
 
   return (
     <div className={cn("w-full", "bg-white", "py-4")}>
@@ -41,15 +45,17 @@ function TeamInfoHeader() {
         ) : (
           <>
             <div className="w-[50px] h-[50px] flex items-center justify-center">
-              <img
-                src={TeamLogos[myTeam.teamName]}
-                alt="logo"
-                className="h-[50px] w-auto object-contain"
-              />
+              {curTeamName && (
+                <img
+                  src={TeamLogos[leagueId][curTeamName]}
+                  alt="logo"
+                  className="h-[50px] w-auto object-contain"
+                />
+              )}
             </div>
 
             <div className={flexCol("gap-1")}>
-              <span className={xlLabel()}>{myTeam?.teamName}</span>
+              <span className={xlLabel()}>{curTeamName}</span>
               <span
                 className={smLabel(
                   "bg-gray-200",
@@ -59,7 +65,7 @@ function TeamInfoHeader() {
                   "text-black"
                 )}
               >
-                K리그 {myTeam?.leagueId}
+                {leagueId === "K1" ? "K리그 1" : "K리그 2"}
               </span>
             </div>
           </>
