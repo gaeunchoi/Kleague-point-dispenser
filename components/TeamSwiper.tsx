@@ -22,7 +22,6 @@ function TeamSwiper() {
     <div className={cn("w-full", "p-6")}>
       <Swiper
         modules={[Navigation, EffectCoverflow]}
-        slidesPerView={3}
         spaceBetween={50}
         centeredSlides={true}
         loop={true}
@@ -37,6 +36,14 @@ function TeamSwiper() {
         grabCursor={true}
         navigation={true}
         pagination={false}
+        breakpoints={{
+          0: {
+            slidesPerView: 1,
+          },
+          640: {
+            slidesPerView: 3,
+          },
+        }}
       >
         {curLeagueData.map((team) => (
           <SwiperSlide key={team.teamName}>
