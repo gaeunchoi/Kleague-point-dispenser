@@ -33,7 +33,7 @@ function ProbabilitySection({
     <>
       <ProgressBar
         color="bg-[#0066b3]"
-        title="다이렉트 승격"
+        title="리그 우승"
         value={result?.win ?? 0}
         max={100}
         showUnit="percent"
