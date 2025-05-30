@@ -1,12 +1,11 @@
 import { useLeagueStore } from "@/store/leagueStore";
-import { cn } from "@/utils/cn";
 import { useSearchParams } from "next/navigation";
 import SubStatsLoading from "./SubStatsLoading";
 import CntPoint from "./CntPoint";
 import { flexCol } from "../styles";
 import GoalPoint from "./GoalPoint";
 
-function TeamStatistics() {
+function TeamSubStats() {
   const searchParams = useSearchParams();
   const { curLeagueData, isLoading } = useLeagueStore();
   const curTeamName = searchParams.get("teamName");
@@ -22,4 +21,4 @@ function TeamStatistics() {
   );
 }
 
-export default TeamStatistics;
+export default TeamSubStats;

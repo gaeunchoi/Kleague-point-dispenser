@@ -1,11 +1,9 @@
 "use client";
-
 import { useState } from "react";
-import TeamStatistics from "./TeamStatistics";
-import TotalLeagueRank from "./TotalLeagueRank";
 import { cn } from "@/utils/cn";
+import TeamSubStats from "./TeamSubStats";
 
-function TeamSubStats() {
+function TabContent() {
   const tabs: string[] = ["리그 순위", "팀 통계"];
   const [activeTab, setActiveTab] = useState(0);
 
@@ -31,10 +29,10 @@ function TeamSubStats() {
         ))}
       </div>
       <div className={cn("w-full", "overflow-x-auto")}>
-        <TeamStatistics />
+        <TeamSubStats />
       </div>
     </div>
   );
 }
 
-export default TeamSubStats;
+export default TabContent;

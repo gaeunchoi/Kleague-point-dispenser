@@ -2,7 +2,7 @@ import { cn } from "@/utils/cn";
 import { flexCol } from "./styles";
 import TeamInfoHeader from "./TeamInfoHeader";
 import TeamMainStats from "./TeamMainStats";
-import TeamSubStats from "./TeamSubStats";
+import TabContent from "./TabContents";
 
 function PointDispenser() {
   return (
@@ -10,7 +10,7 @@ function PointDispenser() {
       <TeamInfoHeader />
       <div className={cn("w-full", "max-w-[1000px]", "mx-auto", "p-4")}>
         <TeamMainStats />
-        <TeamSubStats />
+        <TabContent />
       </div>
     </main>
   );
