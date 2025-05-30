@@ -1,3 +1,4 @@
+import { LeagueId } from "@/data/teamLogo";
 import { Rank } from "@/type/rank";
 
 // 가능한 결과: 승, 무, 패
@@ -7,7 +8,7 @@ export const simulateLeague = (
   originalTable: Rank[],
   remainingGames: number,
   simulations: number,
-  leagueType: "k1" | "k2"
+  leagueType: LeagueId
 ): { [teamName: string]: { win: number; playoff: number } } => {
   const teamStats: { [teamName: string]: { win: number; playoff: number } } =
     {};
@@ -32,7 +33,7 @@ export const simulateLeague = (
       return (b.gainGoal ?? 0) - (a.gainGoal ?? 0);
     });
 
-    if (leagueType === "k1") {
+    if (leagueType === "K1") {
       // 1위: win
       const top = clonedTable[0].teamName;
       if (!teamStats[top]) teamStats[top] = { win: 0, playoff: 0 };
@@ -44,7 +45,7 @@ export const simulateLeague = (
         if (!teamStats[teamName]) teamStats[teamName] = { win: 0, playoff: 0 };
         teamStats[teamName].playoff += 1;
       }
-    } else if (leagueType === "k2") {
+    } else if (leagueType === "K2") {
       // 1위: win
       const top = clonedTable[0].teamName;
       if (!teamStats[top]) teamStats[top] = { win: 0, playoff: 0 };
