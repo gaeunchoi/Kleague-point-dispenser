@@ -1,22 +1,18 @@
 "use client";
-import TeamLogos from "../data/teamLogo";
-import { useEffect } from "react";
 import { useLeagueStore } from "@/store/leagueStore";
+import teamLogos from "@/data/teamLogo";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { cn } from "@/utils/cn";
-import { thClass, tdClass, flexRowCenter } from "./styles";
+import { thClass, tdClass, flexRowCenter } from "../styles";
+import { useRouter } from "next/navigation";
 
 function LeagueRanks() {
-  const { data, isLoading, fetchData } = useLeagueStore();
-  const myTeam = "수원";
-
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const router = useRouter();
+  const { curLeagueData, isLoading, leagueId } = useLeagueStore();
 
   return (
-    <table className={cn("w-full", "text-nowrap")}>
+    <table className={cn("w-full", "min-w-full", "text-nowrap", "table-fixed")}>
       <thead className={cn("bg-gray-200")}>
         <tr>
           {[
@@ -48,43 +44,40 @@ function LeagueRanks() {
                 ))}
               </tr>
             ))
-          : data.map((team) => (
+          : curLeagueData.map((team) => (
               <tr
                 key={team.rank}
                 className={cn(
                   "hover:bg-gray-100",
                   "border-b",
-                  "border-gray-100",
-                  {
-                    "bg-blue-100 font-bold": team.teamName === myTeam,
-                  }
+                  "border-gray-100"
                 )}
               >
                 <td className={tdClass("relative")}>
-                  {team.rank >= 1 && team.rank <= 5 && (
-                    <span
-                      className={cn(
-                        "absolute",
-                        "left-0",
-                        "top-1/2",
-                        "-translate-y-1/2",
-                        "w-1",
-                        "h-[95%]",
-                        team.rank === 1
+                  <span
+                    className={cn(
+                      "absolute",
+                      "left-0",
+                      "top-1/2",
+                      "-translate-y-1/2",
+                      "w-1",
+                      "h-[95%]",
+                      leagueId === "K1"
+                        ? team.rank === 1
+                          ? "bg-blue-500"
+                          : team.rank === 10 || team.rank === 11
+                          ? "bg-orange-400"
+                          : team.rank === 12 && "bg-red-600"
+                        : leagueId === "K2"
+                        ? team.rank === 1
                           ? "bg-blue-500"
                           : team.rank === 2 || team.rank === 3
                           ? "bg-green-400"
-                          : "bg-orange-400"
-                      )}
-                      aria-label={
-                        team.rank === 1
-                          ? "다이렉트 승격"
-                          : team.rank === 2 || team.rank === 3
-                          ? "플레이오프 진출"
-                          : "준플레이오프 진출"
-                      }
-                    />
-                  )}
+                          : (team.rank === 4 || team.rank === 5) &&
+                            "bg-orange-400"
+                        : ""
+                    )}
+                  />
                   <span
                     className={cn(
                       "relative",
@@ -97,13 +90,30 @@ function LeagueRanks() {
                   </span>
                 </td>
                 <td className={tdClass()}>
-                  <div className={flexRowCenter("justify-start", "gap-3")}>
+                  <div
+                    className={flexRowCenter(
+                      "justify-start",
+                      "gap-3",
+                      "cursor-pointer"
+                    )}
+                    onClick={() => {
+                      router.push(
+                        `/TeamView?teamName=${encodeURIComponent(
+                          team.teamName
+                        )}`
+                      );
+                    }}
+                  >
                     <img
-                      src={TeamLogos[team.teamName]}
+                      src={
+                        teamLogos[leagueId][team.teamName] || "/img/kleague.png"
+                      }
                       alt={team.teamName}
                       className={cn("w-[25px]")}
                     />
-                    {team.teamName}
+                    <span className={cn("hover:text-red-900")}>
+                      {team.teamName}
+                    </span>
                   </div>
                 </td>
                 <td className={tdClass()}>{team.gameCnt}</td>

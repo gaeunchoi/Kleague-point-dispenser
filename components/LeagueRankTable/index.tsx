@@ -1,8 +1,8 @@
-import LeagueLegend from "./LeagueLegend";
-import LeagueRanks from "./LeagueRanks";
 import { cn } from "@/utils/cn";
+import LeagueRanks from "./LeagueRanks";
+import LeagueLegend from "./LeagueLegend";
 
-function TotalLeagueRank() {
+function LeagueRankTable() {
   return (
     <div className={cn("overflow-x-scroll")}>
       <LeagueRanks />
@@ -11,4 +11,4 @@ function TotalLeagueRank() {
   );
 }
 
-export default TotalLeagueRank;
+export default LeagueRankTable;
