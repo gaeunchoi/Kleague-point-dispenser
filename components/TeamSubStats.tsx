@@ -2,22 +2,17 @@
 
 import { useState } from "react";
 import TeamStatistics from "./TeamStatistics";
-import PythagoreanAnalysis from "./PythagoreanAnalysis";
 import TotalLeagueRank from "./TotalLeagueRank";
 import { cn } from "@/utils/cn";
 
 function TeamSubStats() {
-  const tabs: string[] = ["리그 순위", "팀 통계", "피타고리안 분석"];
-  const contents = [
-    <TotalLeagueRank key={0} />,
-    <TeamStatistics key={1} />,
-    <PythagoreanAnalysis key={2} />,
-  ];
+  const tabs: string[] = ["리그 순위", "팀 통계"];
+  const contents = [<TotalLeagueRank key={0} />, <TeamStatistics key={1} />];
   const [activeTab, setActiveTab] = useState(0);
 
   return (
     <div className={cn("w-full", "mt-4")}>
-      <div className={cn("grid", "grid-cols-3", "gap-0")}>
+      <div className={cn("grid", "grid-cols-2", "gap-0")}>
         {tabs.map((tab, idx) => (
           <button
             key={idx}
@@ -36,7 +31,9 @@ function TeamSubStats() {
           </button>
         ))}
       </div>
-      <div>{contents[activeTab]}</div>
+      <div className={cn("w-full", "overflow-x-auto")}>
+        {contents[activeTab]}
+      </div>
     </div>
   );
 }
