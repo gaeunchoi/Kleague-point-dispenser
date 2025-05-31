@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 import { useLeagueStore } from "@/store/leagueStore";
 import { cn } from "@/utils/cn";
-import { flexColCenter, xlLabel } from "@/components/styles";
+import { flexColCenter, mainPageBtn, xlLabel } from "@/components/styles";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Navigation } from "swiper/modules";
 import TeamLogos from "@/data/teamLogo";
@@ -56,13 +56,7 @@ function TeamSwiper() {
               />
               <button
                 onClick={() => handleTeamClick(team.teamName)}
-                className={cn(
-                  "bg-gray-300",
-                  "hover:bg-gray-400",
-                  "p-4",
-                  "rounded-xl",
-                  "font-semibold"
-                )}
+                className={mainPageBtn("px-4", "py-2")}
               >
                 선택하기
               </button>

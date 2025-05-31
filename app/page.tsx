@@ -1,9 +1,10 @@
 "use client";
-import { flexColCenter, flexRow } from "@/components/styles";
+import { flexColCenter, mainPageBtn } from "@/components/styles";
 import { useLeagueStore } from "@/store/leagueStore";
 import { cn } from "@/utils/cn";
 import { useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
+import LeagueToggle from "@/components/LeagueToggle";
 import LeagueRankTable from "@/components/LeagueRankTable";
 import TeamSwiper from "@/components/TeamSwiper";
 import Head from "next/head";
@@ -36,29 +37,13 @@ export default function Home() {
         />
       </Head>
       <div
-        className={flexColCenter("justify-center", "w-full", "gap-3", "p-4")}
+        className={flexColCenter("justify-center", "w-full", "gap-3", "p-6")}
       >
-        <div className={flexRow("justify-center", "mt-4")}>
-          <button
-            onClick={() => toggleLeagueId()}
-            className={cn(leagueId === "K1" && "font-bold")}
-          >
-            K리그 1
-          </button>
-          <button
-            onClick={() => toggleLeagueId()}
-            className={cn({
-              "font-bold ml-4": leagueId === "K2",
-              "ml-4": leagueId !== "K2",
-            })}
-          >
-            K리그 2
-          </button>
-        </div>
+        <LeagueToggle />
         {showTable ? <LeagueRankTable /> : <TeamSwiper />}
         <button
           onClick={() => setShowTable((prev) => !prev)}
-          className={cn("bg-blue-200", "p-4", "rounded-2xl")}
+          className={mainPageBtn("px-6", "py-2")}
         >
           {showTable ? "슬라이드로 보기" : "순위표로 보기"}
         </button>

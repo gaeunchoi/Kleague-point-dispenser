@@ -35,3 +35,15 @@ export const flexRowCenter = (...args: ClassValue[]) =>
 
 export const flexColCenter = (...args: ClassValue[]) =>
   cn("flex", "flex-col", "items-center", "gap-2", ...args);
+
+export const mainPageBtn = (...args: ClassValue[]) =>
+  cn(
+    "bg-gray-200",
+    "hover:bg-gray-300",
+    "rounded-full",
+    "shadow",
+    "text-sm",
+    "font-medium",
+    "transition",
+    ...args
+  );
