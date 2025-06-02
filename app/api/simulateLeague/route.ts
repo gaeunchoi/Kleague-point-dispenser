@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
       !Array.isArray(leagueData) ||
       typeof remainingGames !== "number" ||
       typeof simulations !== "number" ||
-      (leagueType !== "K1" && leagueType !== "K2")
+      (leagueType !== "k1" && leagueType !== "k2")
     ) {
       return NextResponse.json(
         { error: "입력값이 올바르지 않습니다." },

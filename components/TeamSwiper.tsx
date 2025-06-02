@@ -14,8 +14,12 @@ function TeamSwiper() {
   const router = useRouter();
   const { curLeagueData, leagueId } = useLeagueStore();
 
-  const handleTeamClick = (teamName: string) => {
-    router.push(`/TeamView?teamName=${encodeURIComponent(teamName)}`);
+  const handleTeamClick = (leagueId: number, teamName: string) => {
+    router.push(
+      `/TeamView?leagueId=k${encodeURIComponent(
+        leagueId
+      )}&teamName=${encodeURIComponent(teamName)}`
+    );
   };
 
   return (
@@ -55,7 +59,7 @@ function TeamSwiper() {
                 className={cn("h-[300px]", "w-auto", "object-contain")}
               />
               <button
-                onClick={() => handleTeamClick(team.teamName)}
+                onClick={() => handleTeamClick(team.leagueId, team.teamName)}
                 className={mainPageBtn("px-4", "py-2")}
               >
                 선택하기

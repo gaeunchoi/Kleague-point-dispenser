@@ -8,8 +8,10 @@ import GoalPoint from "./GoalPoint";
 
 function TeamSubStats() {
   const searchParams = useSearchParams();
-  const { curLeagueData, isLoading } = useLeagueStore();
+  const { k1Data, k2Data, isLoading } = useLeagueStore();
+  const curLeagueId = searchParams.get("leagueId");
   const curTeamName = searchParams.get("teamName");
+  const curLeagueData = curLeagueId === "k1" ? k1Data : k2Data;
   const myTeam = curLeagueData.find((team) => team.teamName === curTeamName);
 
   if (isLoading) <SubStatsLoading />;

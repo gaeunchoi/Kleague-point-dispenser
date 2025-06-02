@@ -11,7 +11,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import { useSearchParams } from "next/navigation";
 
 function TeamMainStats() {
-  const { curLeagueData, isLoading, leagueId } = useLeagueStore();
+  const { k1Data, k2Data, isLoading, leagueId } = useLeagueStore();
   const searchParams = useSearchParams();
   const [promotionResult, setPromotionResult] = useState<{
     win: number;
@@ -19,11 +19,10 @@ function TeamMainStats() {
   } | null>(null);
   const [isSimulating, setIsSimulating] = useState(false);
 
+  const curLeagueId = searchParams.get("leagueId");
   const curTeamName = searchParams.get("teamName");
+  const curLeagueData = curLeagueId === "k1" ? k1Data : k2Data;
   const myTeam = curLeagueData.find((team) => team.teamName === curTeamName);
-
-  console.log(curLeagueData);
-  console.log(myTeam);
 
   const runSimulation = async () => {
     if (!myTeam || curLeagueData.length === 0) return;
@@ -40,7 +39,7 @@ function TeamMainStats() {
           leagueData: curLeagueData,
           remainingGames,
           simulations,
-          leagueType: leagueId,
+          leagueType: curLeagueId,
         }),
       });
 

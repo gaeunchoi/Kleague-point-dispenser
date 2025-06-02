@@ -12,12 +12,15 @@ import {
   xlLabel,
 } from "./styles";
 import { useSearchParams } from "next/navigation";
+import teamLogos from "@/data/teamLogo";
 
 function TeamInfoHeader() {
   const searchParams = useSearchParams();
-  const curTeamName = searchParams.get("teamName");
 
-  const { curLeagueData, isLoading, leagueId } = useLeagueStore();
+  const { k1Data, k2Data, isLoading } = useLeagueStore();
+  const curLeagueId = searchParams.get("leagueId");
+  const curTeamName = searchParams.get("teamName");
+  const curLeagueData = curLeagueId === "k1" ? k1Data : k2Data;
   const myTeam = curLeagueData.find((team) => team.teamName === curTeamName);
 
   return (
@@ -47,7 +50,7 @@ function TeamInfoHeader() {
             <div className="w-[50px] h-[50px] flex items-center justify-center">
               {curTeamName && (
                 <img
-                  src={TeamLogos[leagueId][curTeamName]}
+                  src={TeamLogos[curLeagueId][curTeamName]}
                   alt="logo"
                   className="h-[50px] w-auto object-contain"
                 />
@@ -65,7 +68,7 @@ function TeamInfoHeader() {
                   "text-black"
                 )}
               >
-                {leagueId === "K1" ? "K리그 1" : "K리그 2"}
+                {curLeagueId === "k1" ? "K리그 1" : "K리그 2"}
               </span>
             </div>
           </>

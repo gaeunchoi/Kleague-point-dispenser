@@ -62,13 +62,13 @@ function LeagueRanks() {
                       "-translate-y-1/2",
                       "w-1",
                       "h-[95%]",
-                      leagueId === "K1"
+                      leagueId === "k1"
                         ? team.rank === 1
                           ? "bg-blue-500"
                           : team.rank === 10 || team.rank === 11
                           ? "bg-orange-400"
                           : team.rank === 12 && "bg-red-600"
-                        : leagueId === "K2"
+                        : leagueId === "k2"
                         ? team.rank === 1
                           ? "bg-blue-500"
                           : team.rank === 2 || team.rank === 3
@@ -98,9 +98,9 @@ function LeagueRanks() {
                     )}
                     onClick={() => {
                       router.push(
-                        `/TeamView?teamName=${encodeURIComponent(
-                          team.teamName
-                        )}`
+                        `/TeamView?leagueId=k${encodeURIComponent(
+                          team.leagueId
+                        )}&teamName=${encodeURIComponent(team.teamName)}`
                       );
                     }}
                   >

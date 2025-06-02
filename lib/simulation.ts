@@ -33,7 +33,7 @@ export const simulateLeague = (
       return (b.gainGoal ?? 0) - (a.gainGoal ?? 0);
     });
 
-    if (leagueType === "K1") {
+    if (leagueType === "k1") {
       // 1위: win
       const top = clonedTable[0].teamName;
       if (!teamStats[top]) teamStats[top] = { win: 0, playoff: 0 };
@@ -45,7 +45,7 @@ export const simulateLeague = (
         if (!teamStats[teamName]) teamStats[teamName] = { win: 0, playoff: 0 };
         teamStats[teamName].playoff += 1;
       }
-    } else if (leagueType === "K2") {
+    } else if (leagueType === "k2") {
       // 1위: win
       const top = clonedTable[0].teamName;
       if (!teamStats[top]) teamStats[top] = { win: 0, playoff: 0 };

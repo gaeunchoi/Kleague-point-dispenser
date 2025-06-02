@@ -1,4 +1,4 @@
-export type LeagueId = "K1" | "K2";
+export type LeagueId = "k1" | "k2";
 
 type TeamLogos = {
   [key in LeagueId]: {
@@ -7,7 +7,7 @@ type TeamLogos = {
 };
 
 const teamLogos: TeamLogos = {
-  K1: {
+  k1: {
     울산: "/img/ulsan.png",
     포항: "/img/pohang.png",
     광주: "/img/gwangju.png",
@@ -21,7 +21,7 @@ const teamLogos: TeamLogos = {
     김천: "/img/gimcheon.png",
     안양: "/img/anyang.png",
   },
-  K2: {
+  k2: {
     경남: "/img/gyeongnam.png",
     김포: "/img/gimpo.png",
     부산: "/img/busan.png",

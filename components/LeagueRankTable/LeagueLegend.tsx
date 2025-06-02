@@ -6,7 +6,7 @@ function LeagueLegend() {
   const { leagueId } = useLeagueStore();
 
   const legends =
-    leagueId === "K1"
+    leagueId === "k1"
       ? [
           { color: "bg-blue-500", label: "K리그 우승" },
           { color: "bg-orange-400", label: "플레이오프 진출" },

@@ -32,11 +32,11 @@ function LeagueToggle() {
             "duration-200",
             {
               "bg-white text-gray-900 font-bold":
-                (label === "K리그 1" && leagueId === "K1") ||
-                (label === "K리그 2" && leagueId === "K2"),
+                (label === "K리그 1" && leagueId === "k1") ||
+                (label === "K리그 2" && leagueId === "k2"),
               "text-gray-600 hover:text-gray-900":
-                (label === "K리그 1" && leagueId !== "K1") ||
-                (label === "K리그 2" && leagueId !== "K2"),
+                (label === "K리그 1" && leagueId !== "k1") ||
+                (label === "K리그 2" && leagueId !== "k2"),
             }
           )}
         >

@@ -26,7 +26,7 @@ export const useLeagueStore = create<LeagueStore>()(
         try {
           const res = await fetch("/api/fetchLeagueData");
           const { k1, k2 } = await res.json();
-          const curLeague = get().leagueId === "K1" ? k1 : k2;
+          const curLeague = get().leagueId === "k1" ? k1 : k2;
 
           set({
             k1Data: k1,
@@ -39,11 +39,11 @@ export const useLeagueStore = create<LeagueStore>()(
           set({ isLoading: false });
         }
       },
-      leagueId: "K1",
+      leagueId: "k1",
       toggleLeagueId: () => {
         const state = get();
-        const newId: LeagueId = state.leagueId === "K1" ? "K2" : "K1";
-        const newData = newId === "K1" ? state.k1Data : state.k2Data;
+        const newId: LeagueId = state.leagueId === "k1" ? "k2" : "k1";
+        const newData = newId === "k1" ? state.k1Data : state.k2Data;
         set({ leagueId: newId, curLeagueData: newData });
       },
     }),
