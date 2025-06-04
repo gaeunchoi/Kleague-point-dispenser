@@ -1,5 +1,5 @@
 "use client";
-import TeamLogos from "@/data/teamLogo";
+import TeamLogos, { LeagueId } from "@/data/teamLogo";
 import { useLeagueStore } from "@/store/leagueStore";
 import { cn } from "@/utils/cn";
 import Skeleton from "react-loading-skeleton";
@@ -18,10 +18,11 @@ function TeamInfoHeader() {
   const searchParams = useSearchParams();
 
   const { k1Data, k2Data, isLoading } = useLeagueStore();
-  const curLeagueId = searchParams.get("leagueId");
+  const curLeagueId = searchParams.get("leagueId") as LeagueId;
   const curTeamName = searchParams.get("teamName");
   const curLeagueData = curLeagueId === "k1" ? k1Data : k2Data;
   const myTeam = curLeagueData.find((team) => team.teamName === curTeamName);
+  console.log(curTeamName, curLeagueData, curLeagueId);
 
   return (
     <div className={cn("w-full", "bg-white", "py-4")}>
@@ -48,9 +49,9 @@ function TeamInfoHeader() {
         ) : (
           <>
             <div className="w-[50px] h-[50px] flex items-center justify-center">
-              {curTeamName && (
+              {curLeagueId && curTeamName && (
                 <img
-                  src={TeamLogos[curLeagueId][curTeamName]}
+                  src={teamLogos[curLeagueId][curTeamName]}
                   alt="logo"
                   className="h-[50px] w-auto object-contain"
                 />
