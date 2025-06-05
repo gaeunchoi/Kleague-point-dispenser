@@ -1,16 +1,15 @@
 "use client";
 import { flexColCenter, mainPageBtn } from "@/components/styles";
 import { useLeagueStore } from "@/store/leagueStore";
-import { cn } from "@/utils/cn";
 import { useEffect, useState } from "react";
-import { ClipLoader } from "react-spinners";
+import LoadingSpinner from "@/components/LoadingSpinner";
 import LeagueToggle from "@/components/LeagueToggle";
 import LeagueRankTable from "@/components/LeagueRankTable";
 import TeamSwiper from "@/components/TeamSwiper";
 import Head from "next/head";
 
 export default function Home() {
-  const { isLoading, fetchData, leagueId, toggleLeagueId } = useLeagueStore();
+  const { isLoading, fetchData } = useLeagueStore();
   const [showTable, setShowTable] = useState(false);
 
   useEffect(() => {
@@ -18,11 +17,7 @@ export default function Home() {
   }, []);
 
   if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <ClipLoader color="#0066b3" size={48} />
-      </div>
-    );
+    return <LoadingSpinner h="h-screen" />;
   }
 
   return (

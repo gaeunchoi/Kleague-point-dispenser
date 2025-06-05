@@ -1,8 +1,7 @@
 "use client";
 import Skeleton from "react-loading-skeleton";
 import ProgressBar from "../ProgressBar";
-import { ClipLoader } from "react-spinners";
-import { flexRowCenter } from "../styles";
+import LoadingSpinner from "../LoadingSpinner";
 
 interface ProbabilitySectionProps {
   isLoading: boolean;
@@ -21,13 +20,7 @@ function ProbabilitySection({
     );
   }
 
-  if (isSimulating) {
-    return (
-      <div className={flexRowCenter("justify-center", "h-[150px]")}>
-        <ClipLoader color="#0066b3" size={48} />
-      </div>
-    );
-  }
+  if (isSimulating) return <LoadingSpinner h="h-[150px]" />;
 
   return (
     <>
