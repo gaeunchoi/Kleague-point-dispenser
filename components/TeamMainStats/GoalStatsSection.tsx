@@ -2,6 +2,7 @@
 import Skeleton from "react-loading-skeleton";
 import ProgressBar from "../ProgressBar";
 import StatsInfo from "../StatsInfo";
+import { getSignLabel } from "@/utils/sign";
 
 interface GoalStatsSection {
   isLoading: boolean;
@@ -26,26 +27,18 @@ function GoalStatsSection({ isLoading, gainGoal, lossGoal }: GoalStatsSection) {
       </>
     );
   }
+
   return (
     <>
-      <ProgressBar
-        color="bg-[#0066b3]"
-        title="득점"
-        value={gainGoal}
-        max={total}
-        showUnit="score"
-      />
-      <ProgressBar
-        color="bg-[#e60012]"
-        title="실점"
-        value={lossGoal}
-        max={total}
-        showUnit="score"
-      />
-      <StatsInfo
-        title="득실차"
-        displayValue={`${gapGoal >= 0 ? "+" : ""}${gapGoal}`}
-      />
+      <div>
+        <StatsInfo title="득점" value={`${gainGoal}점`} />
+        <ProgressBar color="bg-[#0066b3]" value={gainGoal} max={total} />
+      </div>
+      <div>
+        <StatsInfo title="실점" value={`${lossGoal}점`} />
+        <ProgressBar color="bg-[#e60012]" value={lossGoal} max={total} />
+      </div>
+      <StatsInfo title="득실차" value={getSignLabel(gapGoal)} />
     </>
   );
 }
