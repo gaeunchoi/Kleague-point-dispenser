@@ -62,20 +62,16 @@ function LeagueRanks() {
                       "-translate-y-1/2",
                       "w-1",
                       "h-[95%]",
-                      leagueId === "k1"
-                        ? team.rank === 1
-                          ? "bg-blue-500"
-                          : team.rank === 10 || team.rank === 11
-                          ? "bg-orange-400"
-                          : team.rank === 12 && "bg-red-600"
-                        : leagueId === "k2"
-                        ? team.rank === 1
-                          ? "bg-blue-500"
-                          : team.rank === 2 || team.rank === 3
-                          ? "bg-green-400"
-                          : (team.rank === 4 || team.rank === 5) &&
-                            "bg-orange-400"
-                        : ""
+                      leagueId === "k1" && {
+                        "bg-blue-500": team.rank === 1,
+                        "bg-orange-400": team.rank === 10 || team.rank === 11,
+                        "bg-red-600": team.rank === 12,
+                      },
+                      leagueId === "k2" && {
+                        "bg-blue-500": team.rank === 1,
+                        "bg-green-400": team.rank === 2 || team.rank === 3,
+                        "bg-orange-400": team.rank === 4 || team.rank == 5,
+                      }
                     )}
                   />
                   <span
@@ -98,9 +94,9 @@ function LeagueRanks() {
                     )}
                     onClick={() => {
                       router.push(
-                        `/TeamView?leagueId=k${encodeURIComponent(
+                        `/TeamView?leagueId=k${
                           team.leagueId
-                        )}&teamName=${encodeURIComponent(team.teamName)}`
+                        }&teamName=${encodeURIComponent(team.teamName)}`
                       );
                     }}
                   >
