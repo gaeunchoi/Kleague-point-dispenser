@@ -1,18 +1,17 @@
 "use client";
-import { useLeagueStore } from "@/store/leagueStore";
 import { useSearchParams } from "next/navigation";
 import SubStatsLoading from "./SubStatsLoading";
 import CntPoint from "./CntPoint";
 import { flexCol } from "../styles";
 import GoalPoint from "./GoalPoint";
+import useLeagueData from "@/hooks/useLeagueData";
+import { LeagueId } from "@/data/teamLogo";
 
 function TeamSubStats() {
   const searchParams = useSearchParams();
-  const { k1Data, k2Data, isLoading } = useLeagueStore();
-  const curLeagueId = searchParams.get("leagueId");
+  const curLeagueId = searchParams.get("leagueId") as LeagueId;
   const curTeamName = searchParams.get("teamName");
-  const curLeagueData = curLeagueId === "k1" ? k1Data : k2Data;
-  const myTeam = curLeagueData.find((team) => team.teamName === curTeamName);
+  const { myTeam, isLoading } = useLeagueData(curLeagueId, curTeamName);
 
   if (isLoading) <SubStatsLoading />;
 

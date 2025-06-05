@@ -1,6 +1,5 @@
 "use client";
-import TeamLogos, { LeagueId } from "@/data/teamLogo";
-import { useLeagueStore } from "@/store/leagueStore";
+import teamLogos, { LeagueId } from "@/data/teamLogo";
 import { cn } from "@/utils/cn";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
@@ -12,17 +11,15 @@ import {
   xlLabel,
 } from "./styles";
 import { useSearchParams } from "next/navigation";
-import teamLogos from "@/data/teamLogo";
+import useLeagueData from "@/hooks/useLeagueData";
+import { LEAGUE_LABELS } from "@/constants";
 
 function TeamInfoHeader() {
   const searchParams = useSearchParams();
-
-  const { k1Data, k2Data, isLoading } = useLeagueStore();
   const curLeagueId = searchParams.get("leagueId") as LeagueId;
   const curTeamName = searchParams.get("teamName");
-  const curLeagueData = curLeagueId === "k1" ? k1Data : k2Data;
-  const myTeam = curLeagueData.find((team) => team.teamName === curTeamName);
-  console.log(curTeamName, curLeagueData, curLeagueId);
+
+  const { myTeam, isLoading } = useLeagueData(curLeagueId, curTeamName);
 
   return (
     <div className={cn("w-full", "bg-white", "py-4")}>
@@ -43,7 +40,7 @@ function TeamInfoHeader() {
 
             <div className={flexCol("gap-2", "w-[200px]")}>
               <Skeleton height={24} borderRadius={12} />
-              <Skeleton height={20} width="62px" borderRadius={12} />
+              <Skeleton height={20} width={62} borderRadius={12} />
             </div>
           </div>
         ) : (
@@ -69,7 +66,7 @@ function TeamInfoHeader() {
                   "text-black"
                 )}
               >
-                {curLeagueId === "k1" ? "K리그 1" : "K리그 2"}
+                {LEAGUE_LABELS[curLeagueId]}
               </span>
             </div>
           </>

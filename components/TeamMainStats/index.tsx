@@ -1,5 +1,4 @@
 "use client";
-import { useLeagueStore } from "@/store/leagueStore";
 import CardSection from "../CardSection";
 import { cn } from "@/utils/cn";
 import { xlLabel } from "../styles";
@@ -9,20 +8,26 @@ import GoalStatsSection from "./GoalStatsSection";
 import MagicNumberSection from "./MagicNumberSection";
 import "react-loading-skeleton/dist/skeleton.css";
 import { useSearchParams } from "next/navigation";
+import useLeagueData from "@/hooks/useLeagueData";
+import { LeagueId } from "@/data/teamLogo";
+
+type simulationResult = {
+  win: number;
+  playoff: number;
+};
 
 function TeamMainStats() {
-  const { k1Data, k2Data, isLoading, leagueId } = useLeagueStore();
-  const searchParams = useSearchParams();
-  const [promotionResult, setPromotionResult] = useState<{
-    win: number;
-    playoff: number;
-  } | null>(null);
+  const [promotionResult, setPromotionResult] =
+    useState<simulationResult | null>(null);
   const [isSimulating, setIsSimulating] = useState(false);
 
-  const curLeagueId = searchParams.get("leagueId");
+  const searchParams = useSearchParams();
+  const curLeagueId = searchParams.get("leagueId") as LeagueId;
   const curTeamName = searchParams.get("teamName");
-  const curLeagueData = curLeagueId === "k1" ? k1Data : k2Data;
-  const myTeam = curLeagueData.find((team) => team.teamName === curTeamName);
+  const { curLeagueData, myTeam, isLoading } = useLeagueData(
+    curLeagueId,
+    curTeamName
+  );
 
   const runSimulation = async () => {
     if (!myTeam || curLeagueData.length === 0) return;
@@ -48,10 +53,10 @@ function TeamMainStats() {
         throw new Error(errorData.error || "시뮬레이션 실패");
       }
 
-      const result = await res.json();
+      const result = (await res.json()) as Record<string, simulationResult>;
 
       if (myTeam) {
-        const myResult = result[myTeam.teamName]; // 예: { win: 82.3, playoff: 68.1 }
+        const myResult = result[myTeam.teamName];
         setPromotionResult(myResult);
       }
     } catch (err) {
