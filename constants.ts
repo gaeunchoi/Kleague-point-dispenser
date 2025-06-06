@@ -15,3 +15,14 @@ export const LEGENDS = {
     { color: "bg-orange-400", label: "준플레이오프 진출" },
   ],
 };
+
+export const END_YN = {
+  Y: { color: "bg-custom-red", label: "경기종료" },
+  N: { color: "bg-custom-blue", label: "경기전" },
+};
+
+export const RESULT_LABEL_COLOR = {
+  승: "bg-custom-blue",
+  무: "bg-custom-gray",
+  패: "bg-custom-red",
+};
