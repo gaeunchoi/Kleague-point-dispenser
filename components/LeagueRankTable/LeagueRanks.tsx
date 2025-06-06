@@ -1,11 +1,11 @@
 "use client";
 import { useLeagueStore } from "@/store/leagueStore";
-import teamLogos from "@/data/teamLogo";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { cn } from "@/utils/cn";
-import { thClass, tdClass, flexRowCenter } from "../styles";
+import { thClass, tdClass } from "../styles";
 import { useRouter } from "next/navigation";
+import TeamLogoWithName from "../TeamLogoWithName";
 
 function LeagueRanks() {
   const router = useRouter();
@@ -85,32 +85,23 @@ function LeagueRanks() {
                     {team.rank}
                   </span>
                 </td>
-                <td className={tdClass()}>
-                  <div
-                    className={flexRowCenter(
-                      "justify-start",
-                      "gap-3",
-                      "cursor-pointer"
-                    )}
-                    onClick={() => {
-                      router.push(
-                        `/TeamView?leagueId=k${
-                          team.leagueId
-                        }&teamName=${encodeURIComponent(team.teamName)}`
-                      );
-                    }}
-                  >
-                    <img
-                      src={
-                        teamLogos[leagueId][team.teamName] || "/img/kleague.png"
-                      }
-                      alt={team.teamName}
-                      className={cn("w-[25px]")}
-                    />
-                    <span className={cn("hover:text-red-900")}>
-                      {team.teamName}
-                    </span>
-                  </div>
+                <td
+                  className={tdClass("cursor-pointer")}
+                  onClick={() => {
+                    router.push(
+                      `/TeamView?leagueId=k${
+                        team.leagueId
+                      }&teamName=${encodeURIComponent(team.teamName)}`
+                    );
+                  }}
+                >
+                  <TeamLogoWithName
+                    leagueId={team.leagueId}
+                    teamName={team.teamName}
+                    isMyTeam={false}
+                    isReverse={true}
+                    isUsedTable={true}
+                  />
                 </td>
                 <td className={tdClass()}>{team.gameCnt}</td>
                 <td className={tdClass()}>{team.winCnt}</td>
