@@ -3,16 +3,17 @@ import { cn } from "@/utils/cn";
 
 // Table
 export const thClass = (...args: ClassValue[]) =>
-  cn("font-medium", "px-4", "py-2", "align-middle", "text-gray-600", ...args);
+  cn("font-medium", "p-2", "align-middle", "text-gray-600", ...args);
 
 export const tdClass = (...args: ClassValue[]) =>
   cn(
     "font-medium",
-    "px-4",
-    "py-2",
+    "p-2",
     "align-middle",
     "py-3",
     "text-center",
+    "border-b",
+    "border-gray-200",
     ...args
   );
 

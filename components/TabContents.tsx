@@ -2,9 +2,11 @@
 import { useState } from "react";
 import { cn } from "@/utils/cn";
 import TeamSubStats from "./TeamSubStats";
+import LeagueSchedule from "./LeagueSchedule";
 
 function TabContent() {
-  const tabs: string[] = ["리그 순위", "팀 통계"];
+  const tabs: string[] = ["팀 통계", "리그 일정"];
+  const contents = [<TeamSubStats key="0" />, <LeagueSchedule key="1" />];
   const [activeTab, setActiveTab] = useState(0);
 
   return (
@@ -29,7 +31,7 @@ function TabContent() {
         ))}
       </div>
       <div className={cn("w-full", "overflow-x-auto")}>
-        <TeamSubStats />
+        {contents[activeTab]}
       </div>
     </div>
   );
