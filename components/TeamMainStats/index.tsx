@@ -5,8 +5,6 @@ import { xlLabel } from "../styles";
 import { useEffect, useState } from "react";
 import ProbabilitySection from "./ProbabilitySection";
 import GoalStatsSection from "./GoalStatsSection";
-import MagicNumberSection from "./MagicNumberSection";
-import "react-loading-skeleton/dist/skeleton.css";
 import { useSearchParams } from "next/navigation";
 import useLeagueData from "@/hooks/useLeagueData";
 import { LeagueId } from "@/data/teamLogo";
@@ -71,7 +69,7 @@ function TeamMainStats() {
   }, [isLoading, curLeagueData]);
 
   return (
-    <div className={cn("grid", "sm:grid-cols-1", "md:grid-cols-3", "gap-3")}>
+    <div className={cn("grid", "sm:grid-cols-1", "md:grid-cols-2", "gap-3")}>
       <CardSection
         title={<h3 className={xlLabel("text-gray-900")}>승격 확률</h3>}
       >
@@ -79,15 +77,6 @@ function TeamMainStats() {
           isLoading={isLoading}
           isSimulating={isSimulating}
           result={promotionResult}
-        />
-      </CardSection>
-      <CardSection
-        title={<h3 className={xlLabel("text-gray-900")}>매직 넘버</h3>}
-      >
-        <MagicNumberSection
-          isLoading={isLoading}
-          remainingGames={42 - (myTeam?.gameCnt ?? 0)}
-          rank={myTeam?.rank ?? "-"}
         />
       </CardSection>
       <CardSection
