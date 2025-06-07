@@ -6,6 +6,7 @@ import TeamLogoWithName from "../TeamLogoWithName";
 import { useSearchParams } from "next/navigation";
 import EndLabel from "./EndLabel";
 import ResultLabel from "./ResultLabel";
+import { match } from "assert";
 
 function ScheduleTableRow({ matchInfo }: { matchInfo: Schedule }) {
   const searchParams = useSearchParams();
@@ -17,7 +18,9 @@ function ScheduleTableRow({ matchInfo }: { matchInfo: Schedule }) {
   return (
     <tr className={cn("hover:bg-gray-100", "border-b", "border-gray-100")}>
       <td className={tdClass()}>R{matchInfo.roundId}</td>
-      <td className={tdClass()}>{matchInfo.gameDate}</td>
+      <td className={tdClass()}>
+        {matchInfo.gameDate}({matchInfo.weekdayShort})
+      </td>
       <td className={tdClass()}>{matchInfo.gameTime}</td>
       <td className={tdClass(flexColCenter("gap-2"))}>
         <div className={flexRowCenter("justify-center", "gap-4")}>

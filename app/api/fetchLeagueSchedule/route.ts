@@ -1,6 +1,6 @@
 import { Schedule } from "@/type/schedule";
 import axios from "axios";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 export async function POST() {
   try {
@@ -21,6 +21,7 @@ export async function POST() {
         leagueId: sche.leagueId,
         roundId: sche.roundId,
         gameDate: sche.gameDate,
+        weekdayShort: sche.weekdayShort,
         gameTime: sche.gameTime,
         endYn: sche.endYn,
         homeTeamName: sche.homeTeamName,
