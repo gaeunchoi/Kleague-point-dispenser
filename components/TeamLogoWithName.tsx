@@ -22,7 +22,7 @@ function TeamLogoWithName({
     <div
       className={flexRowCenter("gap-3", "cursor-pointer", "w-[94px]", {
         "justify-start": isUsedTable,
-        "jusitfy-center": !isUsedTable,
+        "justify-center": !isUsedTable,
       })}
     >
       <img
