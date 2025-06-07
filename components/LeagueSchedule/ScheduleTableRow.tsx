@@ -1,12 +1,11 @@
 import { Schedule } from "@/type/schedule";
 import { cn } from "@/utils/cn";
-import { flexColCenter, flexRowCenter, tdClass, xlLabel } from "../styles";
+import { flexColCenter, flexRowCenter, tdClass } from "../styles";
+import { useSearchParams } from "next/navigation";
 import ScoreBoard from "./ScoreBoard";
 import TeamLogoWithName from "../TeamLogoWithName";
-import { useSearchParams } from "next/navigation";
 import EndLabel from "./EndLabel";
 import ResultLabel from "./ResultLabel";
-import { match } from "assert";
 
 function ScheduleTableRow({ matchInfo }: { matchInfo: Schedule }) {
   const searchParams = useSearchParams();
@@ -17,13 +16,13 @@ function ScheduleTableRow({ matchInfo }: { matchInfo: Schedule }) {
 
   return (
     <tr className={cn("hover:bg-gray-100", "border-b", "border-gray-100")}>
-      <td className={tdClass()}>R{matchInfo.roundId}</td>
-      <td className={tdClass()}>
+      <td className={tdClass("min-w-[60px]")}>R{matchInfo.roundId}</td>
+      <td className={tdClass("min-w-[120px]")}>
         {matchInfo.gameDate}({matchInfo.weekdayShort})
       </td>
-      <td className={tdClass()}>{matchInfo.gameTime}</td>
-      <td className={tdClass(flexColCenter("gap-2"))}>
-        <div className={flexRowCenter("justify-center", "gap-4")}>
+      <td className={tdClass("min-w-[76px]")}>{matchInfo.gameTime}</td>
+      <td className={tdClass(flexColCenter("gap-2", "min-w-[270px]"))}>
+        <div className={flexRowCenter("justify-center", "gap-3")}>
           <TeamLogoWithName
             leagueId={matchInfo.leagueId}
             teamName={matchInfo.homeTeamName}
@@ -49,8 +48,8 @@ function ScheduleTableRow({ matchInfo }: { matchInfo: Schedule }) {
           />
         </div>
       </td>
-      <td className={tdClass()}>{matchInfo.fieldName}</td>
-      <td className={tdClass()}>
+      <td className={tdClass("min-w-[153px]")}>{matchInfo.fieldName}</td>
+      <td className={tdClass("min-w-[73px]")}>
         {matchInfo.audienceQty !== 0
           ? matchInfo.audienceQty.toLocaleString()
           : "-"}

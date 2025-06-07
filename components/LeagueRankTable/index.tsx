@@ -4,7 +4,7 @@ import LeagueLegend from "./LeagueLegend";
 
 function LeagueRankTable() {
   return (
-    <div className={cn("overflow-x-scroll")}>
+    <div className={cn("w-full", "overflow-x-scroll")}>
       <LeagueRanks />
       <LeagueLegend />
     </div>

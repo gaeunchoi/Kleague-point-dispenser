@@ -24,17 +24,16 @@ function LeagueSchedule() {
   if (isLoading) return <LoadingSpinner h="h-[500px]" />;
 
   return (
-    <div className={flexCol("w-full")}>
+    <div className={flexCol("w-full", "overflow-x-scroll")}>
       <table>
         <thead>
           <tr>
-            {["라운드", "날짜", "시간", "매치센터", "장소", "관중수"].map(
-              (label) => (
-                <th key={label} className={thClass()}>
-                  {label}
-                </th>
-              )
-            )}
+            <th className={thClass("min-w-[60px]")}>라운드</th>
+            <th className={thClass("min-w-[120px]")}>날짜</th>
+            <th className={thClass("min-w-[76px]")}>시간</th>
+            <th className={thClass("min-w-[270px]")}>매치센터</th>
+            <th className={thClass("min-w-[153px]")}>장소</th>
+            <th className={thClass("min-w-[73px]")}>관중수</th>
           </tr>
         </thead>
         <tbody>

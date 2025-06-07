@@ -16,6 +16,28 @@ export const tdClass = (...args: ClassValue[]) =>
     "border-gray-200",
     ...args
   );
+export const rankThClass = (...args: ClassValue[]) =>
+  cn(
+    "font-medium",
+    "p-2",
+    "align-middle",
+    "text-gray-600",
+    "min-w-[60px]",
+    ...args
+  );
+
+export const rankTdClass = (...args: ClassValue[]) =>
+  cn(
+    "font-medium",
+    "p-2",
+    "align-middle",
+    "py-3",
+    "text-center",
+    "border-b",
+    "border-gray-200",
+    "min-w-[60px]",
+    ...args
+  );
 
 // Label
 export const smLabel = (...args: ClassValue[]) =>
