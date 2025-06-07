@@ -86,7 +86,8 @@ function TeamInfoHeader() {
                     "rounded-xl",
                     "px-2",
                     "py-1",
-                    "text-black"
+                    "text-black",
+                    "text-center"
                   )}
                 >
                   {LEAGUE_LABELS[curLeagueId]}
