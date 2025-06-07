@@ -56,7 +56,13 @@ function TeamSwiper() {
               <img
                 src={TeamLogos[leagueId][team.teamName] || "/img/kleague.png"}
                 alt={team.teamName}
-                className={cn("h-[300px]", "w-auto", "object-contain")}
+                className={cn(
+                  "h-[300px]",
+                  "w-auto",
+                  "object-contain",
+                  "cursor-pointer"
+                )}
+                onClick={() => handleTeamClick(team.leagueId, team.teamName)}
               />
               <button
                 onClick={() => handleTeamClick(team.leagueId, team.teamName)}
