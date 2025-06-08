@@ -43,7 +43,7 @@ function ScheduleTableRow({ matchInfo }: { matchInfo: Schedule }) {
         </div>
         <div className={flexRowCenter()}>
           <EndLabel YN={matchInfo.endYn} />
-          {myTeamGapGoal && (
+          {isMyTeam && typeof myTeamGapGoal === "number" && (
             <ResultLabel
               endYN={matchInfo.endYn}
               myTeamGapGoal={isMyTeamHome ? myTeamGapGoal : -1 * myTeamGapGoal}
