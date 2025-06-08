@@ -1,12 +1,13 @@
 "use client";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { cn } from "@/utils/cn";
-import TeamSubStats from "./TeamSubStats";
-import LeagueSchedule from "./LeagueSchedule";
 
-function TabContent() {
-  const tabs: string[] = ["팀 통계", "리그 일정"];
-  const contents = [<TeamSubStats key="0" />, <LeagueSchedule key="1" />];
+type TabContentProps = {
+  tabs: string[];
+  contents: ReactNode[];
+};
+
+function TabContent({ tabs, contents }: TabContentProps) {
   const [activeTab, setActiveTab] = useState(0);
 
   return (

@@ -7,18 +7,18 @@ import LeagueToggle from "@/components/LeagueToggle";
 import LeagueRankTable from "@/components/LeagueRankTable";
 import TeamSwiper from "@/components/TeamSwiper";
 import Head from "next/head";
+import TabContent from "@/components/TabContents";
+import LeagueSchedule from "@/components/LeagueSchedule";
 
 export default function Home() {
   const { isLoading, fetchData } = useLeagueStore();
-  const [showTable, setShowTable] = useState(false);
+  const [showRankTable, setShowRankTable] = useState<boolean>(false);
 
   useEffect(() => {
     fetchData();
   }, []);
 
-  if (isLoading) {
-    return <LoadingSpinner h="h-screen" />;
-  }
+  if (isLoading) return <LoadingSpinner h="h-screen" />;
 
   return (
     <>
@@ -35,12 +35,19 @@ export default function Home() {
         className={flexColCenter("justify-center", "w-full", "gap-3", "p-6")}
       >
         <LeagueToggle />
-        {showTable ? <LeagueRankTable /> : <TeamSwiper />}
+        {showRankTable ? (
+          <TabContent
+            tabs={["리그 순위표", "리그 일정표"]}
+            contents={[<LeagueRankTable key="0" />, <LeagueSchedule key="1" />]}
+          />
+        ) : (
+          <TeamSwiper />
+        )}
         <button
-          onClick={() => setShowTable((prev) => !prev)}
+          onClick={() => setShowRankTable((prev) => !prev)}
           className={mainPageBtn("px-6", "py-2")}
         >
-          {showTable ? "슬라이드로 보기" : "순위표로 보기"}
+          {showRankTable ? "슬라이드로 보기" : "순위표로 보기"}
         </button>
       </div>
     </>

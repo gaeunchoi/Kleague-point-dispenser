@@ -20,7 +20,7 @@ function TeamLogoWithName({
   const myLeagueId: LeagueId = leagueId === 1 ? "k1" : "k2";
   return (
     <div
-      className={flexRowCenter("gap-2", "cursor-pointer", "w-[75px]", {
+      className={flexRowCenter("gap-2", "cursor-pointer", "w-[90px]", {
         "justify-start": isUsedTable,
         "justify-center": !isUsedTable,
       })}

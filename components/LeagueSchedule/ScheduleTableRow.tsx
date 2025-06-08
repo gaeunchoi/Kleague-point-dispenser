@@ -11,8 +11,9 @@ function ScheduleTableRow({ matchInfo }: { matchInfo: Schedule }) {
   const searchParams = useSearchParams();
   const myTeamName = searchParams.get("teamName");
 
-  const isMyTeamHome = matchInfo.homeTeamName === myTeamName;
-  const myTeamGapGoal = matchInfo.homeGoal - matchInfo.awayGoal;
+  const isMyTeam = myTeamName !== null;
+  const isMyTeamHome = isMyTeam && matchInfo.homeTeamName === myTeamName;
+  const myTeamGapGoal = isMyTeam && matchInfo.homeGoal - matchInfo.awayGoal;
 
   return (
     <tr className={cn("hover:bg-gray-100", "border-b", "border-gray-100")}>
@@ -36,16 +37,18 @@ function ScheduleTableRow({ matchInfo }: { matchInfo: Schedule }) {
           <TeamLogoWithName
             leagueId={matchInfo.leagueId}
             teamName={matchInfo.awayTeamName}
-            isMyTeam={!isMyTeamHome}
+            isMyTeam={isMyTeam && !isMyTeamHome}
             isReverse={true}
           />
         </div>
         <div className={flexRowCenter()}>
           <EndLabel YN={matchInfo.endYn} />
-          <ResultLabel
-            endYN={matchInfo.endYn}
-            myTeamGapGoal={isMyTeamHome ? myTeamGapGoal : -1 * myTeamGapGoal}
-          />
+          {myTeamGapGoal && (
+            <ResultLabel
+              endYN={matchInfo.endYn}
+              myTeamGapGoal={isMyTeamHome ? myTeamGapGoal : -1 * myTeamGapGoal}
+            />
+          )}
         </div>
       </td>
       <td className={tdClass("min-w-[153px]")}>{matchInfo.fieldName}</td>

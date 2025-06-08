@@ -1,3 +1,4 @@
+"use client";
 import { useEffect } from "react";
 import { flexCol, thClass } from "../styles";
 import { useSearchParams } from "next/navigation";
@@ -6,20 +7,21 @@ import { LeagueId } from "@/data/teamLogo";
 import { useScheduleStore } from "@/store/scheduleStore";
 import LoadingSpinner from "../LoadingSpinner";
 import ScheduleTableRow from "./ScheduleTableRow";
+import { useLeagueStore } from "@/store/leagueStore";
 
 function LeagueSchedule() {
   const { fetchData } = useScheduleStore();
   const searchParams = useSearchParams();
-  const curleagueId = searchParams.get("leagueId") as LeagueId;
+  const searchLeagueId = searchParams.get("leagueId") as LeagueId;
   const curTeamName = searchParams.get("teamName");
-  const { myTeamSchedule, isLoading } = useLeagueSchedule(
-    curleagueId,
-    curTeamName
-  );
+
+  const { leagueId } = useLeagueStore();
+  const curleagueId = searchLeagueId ?? leagueId;
+  const { schedule, isLoading } = useLeagueSchedule(curleagueId, curTeamName);
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [curleagueId]);
 
   if (isLoading) return <LoadingSpinner h="h-[500px]" />;
 
@@ -37,7 +39,7 @@ function LeagueSchedule() {
           </tr>
         </thead>
         <tbody>
-          {myTeamSchedule.map((teamSchedule, idx) => (
+          {schedule.map((teamSchedule, idx) => (
             <ScheduleTableRow key={idx} matchInfo={teamSchedule} />
           ))}
         </tbody>
