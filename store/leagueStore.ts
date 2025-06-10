@@ -20,7 +20,7 @@ export const useLeagueStore = create<LeagueStore>()(
       k1Data: [],
       k2Data: [],
       curLeagueData: [],
-      isLoading: true,
+      isLoading: false,
       fetchData: async () => {
         set({ isLoading: true });
         try {
