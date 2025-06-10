@@ -1,6 +1,7 @@
 import teamLogos, { LeagueId } from "@/data/teamLogo";
 import { flexRowCenter } from "./styles";
 import { cn } from "@/utils/cn";
+import { useRouter } from "next/navigation";
 
 type LogoWithNameProps = {
   leagueId: number;
@@ -17,7 +18,9 @@ function TeamLogoWithName({
   isReverse = false,
   isUsedTable = false,
 }: LogoWithNameProps) {
+  const router = useRouter();
   const myLeagueId: LeagueId = leagueId === 1 ? "k1" : "k2";
+
   return (
     <div
       className={flexRowCenter("gap-2", "cursor-pointer", "w-[90px]", {
@@ -34,9 +37,16 @@ function TeamLogoWithName({
         })}
       />
       <span
-        className={cn("order-2", {
+        className={cn("order-2", "hover:text-blue-400", {
           "font-bold": isMyTeam,
         })}
+        onClick={() => {
+          router.push(
+            `/TeamView?leagueId=${myLeagueId}&teamName=${encodeURIComponent(
+              teamName
+            )}`
+          );
+        }}
       >
         {teamName}
       </span>

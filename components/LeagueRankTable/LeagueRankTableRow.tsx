@@ -2,7 +2,6 @@ import { Rank } from "@/type/rank";
 import { cn } from "@/utils/cn";
 import { rankTdClass } from "../styles";
 import { LeagueId } from "@/data/teamLogo";
-import { useRouter } from "next/navigation";
 import TeamLogoWithName from "../TeamLogoWithName";
 
 type RankTableRowProps = {
@@ -11,7 +10,6 @@ type RankTableRowProps = {
 };
 
 function RankTableRow({ leagueId, teamInfo }: RankTableRowProps) {
-  const router = useRouter();
   return (
     <tr
       key={teamInfo.rank}
@@ -42,16 +40,7 @@ function RankTableRow({ leagueId, teamInfo }: RankTableRowProps) {
           {teamInfo.rank}
         </span>
       </td>
-      <td
-        className={rankTdClass("cursor-pointer", "min-w-[80px]")}
-        onClick={() => {
-          router.push(
-            `/TeamView?leagueId=k${
-              teamInfo.leagueId
-            }&teamName=${encodeURIComponent(teamInfo.teamName)}`
-          );
-        }}
-      >
+      <td className={rankTdClass("cursor-pointer", "min-w-[80px]")}>
         <TeamLogoWithName
           leagueId={teamInfo.leagueId}
           teamName={teamInfo.teamName}
