@@ -8,6 +8,7 @@ import {
   flexColCenter,
   flexRow,
   flexRowCenter,
+  mainPageBtn,
   smLabel,
   xlLabel,
 } from "../styles";
@@ -17,6 +18,7 @@ import { LEAGUE_LABELS } from "@/constants";
 import SimpleStats from "./SimpleStats";
 import { useEffect, useState } from "react";
 import SimpleStatsLoading from "./SimpleStatsLoading";
+import Link from "next/link";
 
 function TeamInfoHeader() {
   const searchParams = useSearchParams();
@@ -51,7 +53,6 @@ function TeamInfoHeader() {
             >
               <Skeleton circle width={50} height={50} className="mr-2" />
             </div>
-
             <div className={flexRowCenter("justify-between", "w-full")}>
               <div className={flexCol("gap-2", "w-[200px]")}>
                 <Skeleton height={24} borderRadius={12} />
@@ -94,6 +95,13 @@ function TeamInfoHeader() {
                 </span>
               </div>
             </div>
+
+            <Link
+              href="/"
+              className={mainPageBtn("px-6", "py-2", "text-center")}
+            >
+              홈화면으로 돌아가기
+            </Link>
             <SimpleStats
               isLoading={loading}
               gainPoint={myTeam.gainPoint}
