@@ -129,9 +129,9 @@ function useLeagueTableData(schedule: Schedule[], teamName: string | null) {
             <td
               className={tdClass(
                 "min-w-[270px]",
-                "gap-2",
                 "border-r",
-                "border-gray-200"
+                "border-gray-200",
+                "space-y-2"
               )}
             >
               <div className={flexRowCenter("justify-center")}>
