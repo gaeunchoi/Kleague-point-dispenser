@@ -8,7 +8,6 @@ import {
   flexColCenter,
   flexRow,
   flexRowCenter,
-  mainPageBtn,
   smLabel,
   xlLabel,
 } from "../styles";
@@ -43,12 +42,9 @@ function TeamInfoHeader() {
         className={flexRowCenter("w-full", "max-w-[1000px]", "mx-auto", "px-4")}
       >
         {loading || !myTeam ? (
-          <>
-            <Link
-              href="/"
-              className={mainPageBtn("px-6", "py-2", "text-center", "mb-2")}
-            >
-              홈으로
+          <div className={flexCol("w-full", "gap-3")}>
+            <Link href="/" className={smLabel("hover:text-blue-400")}>
+              ← 홈으로
             </Link>
             <div className={flexRowCenter("w-full")}>
               <div
@@ -68,9 +64,9 @@ function TeamInfoHeader() {
                 <SimpleStatsLoading />
               </div>
             </div>
-          </>
+          </div>
         ) : (
-          <div className={flexCol("w-full")}>
+          <div className={flexCol("w-full", "gap-3")}>
             <Link href="/" className={smLabel("hover:text-blue-400")}>
               ← 홈으로
             </Link>
