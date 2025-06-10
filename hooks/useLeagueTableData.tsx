@@ -172,12 +172,48 @@ function useLeagueTableData(schedule: Schedule[], teamName: string | null) {
         cell: (info) => {
           const row = info.row.original;
           return (
-            <td className={tdClass("min-w-[153px]")}>
+            <td
+              className={tdClass(
+                "min-w-[153px]",
+                "border-r",
+                "border-gray-200"
+              )}
+            >
               <div className={flexColCenter("justify-center", "gap-1")}>
                 <span>{row.fieldName}</span>
                 <span className={smLabel()}>
                   [{row.audienceQty ? row.audienceQty.toLocaleString() : "-"}명]
                 </span>
+              </div>
+            </td>
+          );
+        },
+      },
+      {
+        header: "심판진",
+        cell: (info) => {
+          const row = info.row.original;
+          if (!row.mainRefree)
+            return (
+              <td className={tdClass("min-w-[100px]", smLabel())}>
+                심판 정보 없음
+              </td>
+            );
+          return (
+            <td className={tdClass("min-w-[150px]")}>
+              <div className={flexRowCenter("justify-center")}>
+                <span className={smLabel()}>주심:</span> {row.mainRefree}
+              </div>
+              <div className={flexRowCenter("justify-center")}>
+                <span className={smLabel()}>부심:</span> {row.subRefree1},{" "}
+                {row.subRefree2}
+              </div>
+              <div className={flexRowCenter("justify-center")}>
+                <span className={smLabel()}>대기심:</span> {row.waitingRefree}
+              </div>
+              <div className={flexRowCenter("justify-center")}>
+                <span className={smLabel()}>VAR:</span> {row.varRefree1},{" "}
+                {row.varRefree2}
               </div>
             </td>
           );

@@ -30,6 +30,12 @@ export async function POST() {
         homeGoal: sche.homeGoal,
         awayGoal: sche.awayGoal,
         audienceQty: sche.audienceQty,
+        mainRefree: sche.refreeName1,
+        subRefree1: sche.refreeName2,
+        subRefree2: sche.refreeName3,
+        waitingRefree: sche.refreeName4,
+        varRefree1: sche.refreeName7,
+        varRefree2: sche.refreeName8,
       }));
 
     const k1Schedules = getLeagueScheduleList(k1ScheData || []);
