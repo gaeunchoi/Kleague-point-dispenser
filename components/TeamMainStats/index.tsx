@@ -28,7 +28,7 @@ function TeamMainStats() {
   );
 
   const runSimulation = async () => {
-    if (!myTeam || curLeagueData.length === 0) return;
+    if (!myTeam || curLeagueData.length === 0 || !curLeagueId) return;
 
     setIsSimulating(true);
     try {
@@ -66,7 +66,7 @@ function TeamMainStats() {
 
   useEffect(() => {
     if (!isLoading && curLeagueData.length > 0) runSimulation();
-  }, [isLoading, curLeagueData]);
+  }, [searchParams, isLoading, curLeagueData]);
 
   return (
     <div className={cn("grid", "sm:grid-cols-1", "md:grid-cols-2", "gap-3")}>
