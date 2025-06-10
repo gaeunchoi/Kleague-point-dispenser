@@ -43,71 +43,77 @@ function TeamInfoHeader() {
         className={flexRowCenter("w-full", "max-w-[1000px]", "mx-auto", "px-4")}
       >
         {loading || !myTeam ? (
-          <div className={flexRowCenter("w-full")}>
-            <div
-              className={flexColCenter(
-                "justify-center",
-                "w-[50px]",
-                "h-[50px]"
-              )}
-            >
-              <Skeleton circle width={50} height={50} className="mr-2" />
-            </div>
-            <div className={flexRowCenter("justify-between", "w-full")}>
-              <div className={flexCol("gap-2", "w-[200px]")}>
-                <Skeleton height={24} borderRadius={12} />
-                <Skeleton height={20} width={62} borderRadius={12} />
-              </div>
-              <SimpleStatsLoading />
-            </div>
-          </div>
-        ) : (
-          <div className={flexRow("justify-between", "w-full")}>
-            <div className={flexRow()}>
-              <div
-                className={flexRowCenter(
-                  "justify-center",
-                  "w-[50px]",
-                  "h-50px"
-                )}
-              >
-                {curLeagueId && curTeamName && (
-                  <img
-                    src={teamLogos[curLeagueId][curTeamName]}
-                    alt="logo"
-                    className="h-[50px] w-auto object-contain"
-                  />
-                )}
-              </div>
-              <div className={flexCol("gap-1")}>
-                <span className={xlLabel()}>{curTeamName}</span>
-                <span
-                  className={smLabel(
-                    "bg-gray-200",
-                    "rounded-xl",
-                    "px-2",
-                    "py-1",
-                    "text-black",
-                    "text-center"
-                  )}
-                >
-                  {LEAGUE_LABELS[curLeagueId]}
-                </span>
-              </div>
-            </div>
-
+          <>
             <Link
               href="/"
-              className={mainPageBtn("px-6", "py-2", "text-center")}
+              className={mainPageBtn("px-6", "py-2", "text-center", "mb-2")}
             >
-              홈화면으로 돌아가기
+              홈으로
             </Link>
-            <SimpleStats
-              isLoading={loading}
-              gainPoint={myTeam.gainPoint}
-              remainingGames={remainingGames}
-              rank={myTeam.rank}
-            />
+            <div className={flexRowCenter("w-full")}>
+              <div
+                className={flexColCenter(
+                  "justify-center",
+                  "w-[50px]",
+                  "h-[50px]"
+                )}
+              >
+                <Skeleton circle width={50} height={50} className="mr-2" />
+              </div>
+              <div className={flexRowCenter("justify-between", "w-full")}>
+                <div className={flexCol("gap-2", "w-[200px]")}>
+                  <Skeleton height={24} borderRadius={12} />
+                  <Skeleton height={20} width={62} borderRadius={12} />
+                </div>
+                <SimpleStatsLoading />
+              </div>
+            </div>
+          </>
+        ) : (
+          <div className={flexCol("w-full")}>
+            <Link href="/" className={smLabel("hover:text-blue-400")}>
+              ← 홈으로
+            </Link>
+            <div className={flexRow("justify-between", "w-full")}>
+              <div className={flexRow()}>
+                <div
+                  className={flexRowCenter(
+                    "justify-center",
+                    "w-[50px]",
+                    "h-50px"
+                  )}
+                >
+                  {curLeagueId && curTeamName && (
+                    <img
+                      src={teamLogos[curLeagueId][curTeamName]}
+                      alt="logo"
+                      className="h-[50px] w-auto object-contain"
+                    />
+                  )}
+                </div>
+                <div className={flexCol("gap-1")}>
+                  <span className={xlLabel()}>{curTeamName}</span>
+                  <span
+                    className={smLabel(
+                      "bg-gray-200",
+                      "rounded-xl",
+                      "px-2",
+                      "py-1",
+                      "text-black",
+                      "text-center"
+                    )}
+                  >
+                    {LEAGUE_LABELS[curLeagueId]}
+                  </span>
+                </div>
+              </div>
+              <SimpleStats
+                isLoading={loading}
+                gainPoint={myTeam.gainPoint}
+                remainingGames={remainingGames}
+                rank={myTeam.rank}
+              />
+            </div>
           </div>
         )}
       </div>
