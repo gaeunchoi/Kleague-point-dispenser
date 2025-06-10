@@ -1,13 +1,19 @@
 "use client";
-import { useEffect } from "react";
+import { Fragment, useEffect } from "react";
+import {
+  useReactTable,
+  getCoreRowModel,
+  flexRender,
+} from "@tanstack/react-table";
 import { flexCol, thClass } from "../styles";
 import { useSearchParams } from "next/navigation";
 import useLeagueSchedule from "@/hooks/useLeagueSchedule";
 import { LeagueId } from "@/data/teamLogo";
 import { useScheduleStore } from "@/store/scheduleStore";
-import LoadingSpinner from "../LoadingSpinner";
-import ScheduleTableRow from "./ScheduleTableRow";
 import { useLeagueStore } from "@/store/leagueStore";
+import LoadingSpinner from "../LoadingSpinner";
+import useLeagueTableData from "@/hooks/useLeagueTableData";
+import { cn } from "@/utils/cn";
 
 function LeagueSchedule() {
   const { fetchData } = useScheduleStore();
@@ -19,32 +25,51 @@ function LeagueSchedule() {
   const curleagueId = searchLeagueId ?? leagueId;
   const { schedule, isLoading } = useLeagueSchedule(curleagueId, curTeamName);
 
+  const { data, columns } = useLeagueTableData(schedule, curTeamName);
+
   useEffect(() => {
     fetchData();
   }, [curleagueId]);
 
+  const table = useReactTable({
+    data,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+  });
+
   if (isLoading) return <LoadingSpinner h="h-[500px]" />;
 
   return (
-    <div className={flexCol("w-full", "overflow-x-scroll")}>
-      <table>
-        <thead>
-          <tr>
-            <th className={thClass("min-w-[60px]")}>라운드</th>
-            <th className={thClass("min-w-[120px]")}>날짜</th>
-            <th className={thClass("min-w-[76px]")}>시간</th>
-            <th className={thClass("min-w-[270px]")}>매치센터</th>
-            <th className={thClass("min-w-[153px]")}>장소</th>
-            <th className={thClass("min-w-[73px]")}>관중수</th>
+    <table className={cn("w-full", "overflow-x-scroll")}>
+      <thead>
+        {table.getHeaderGroups().map((headerGroup) => (
+          <tr key={headerGroup.id}>
+            {headerGroup.headers.map((header) => (
+              <th
+                key={header.id}
+                className={thClass("border-b", "border-r", "border-gray-200")}
+              >
+                {flexRender(
+                  header.column.columnDef.header,
+                  header.getContext()
+                )}
+              </th>
+            ))}
           </tr>
-        </thead>
-        <tbody>
-          {schedule.map((teamSchedule, idx) => (
-            <ScheduleTableRow key={idx} matchInfo={teamSchedule} />
-          ))}
-        </tbody>
-      </table>
-    </div>
+        ))}
+      </thead>
+      <tbody>
+        {table.getRowModel().rows.map((row) => (
+          <tr key={row.id}>
+            {row.getVisibleCells().map((cell) => (
+              <Fragment key={cell.id}>
+                {flexRender(cell.column.columnDef.cell, cell.getContext())}
+              </Fragment>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 }
 
