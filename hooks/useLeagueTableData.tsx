@@ -195,12 +195,12 @@ function useLeagueTableData(schedule: Schedule[], teamName: string | null) {
           const row = info.row.original;
           if (!row.mainRefree)
             return (
-              <td className={tdClass("min-w-[100px]", smLabel())}>
+              <td className={tdClass("min-w-[165px]", smLabel())}>
                 심판 정보 없음
               </td>
             );
           return (
-            <td className={tdClass("min-w-[150px]")}>
+            <td className={tdClass("min-w-[165px]")}>
               <div className={flexRowCenter("justify-center")}>
                 <span className={smLabel()}>주심:</span> {row.mainRefree}
               </div>
