@@ -11,6 +11,7 @@ type LeagueStore = {
   fetchData: () => void;
 
   leagueId: LeagueId;
+  setLeagueId: (id: LeagueId) => void;
   toggleLeagueId: () => void;
 };
 
@@ -23,7 +24,23 @@ export const useLeagueStore = create<LeagueStore>()(
       isLoading: false,
       fetchData: async () => {
         set({ isLoading: true });
+
+        // 이미 api 호출해서 데이터 갖고 있으면 fetch 생략해버려
         try {
+          const state = get();
+          if (
+            (state.leagueId === "k1" && state.k1Data.length > 0) ||
+            (state.leagueId === "k2" && state.k2Data.length > 0)
+          ) {
+            set({
+              curLeagueData:
+                state.leagueId === "k1" ? state.k1Data : state.k2Data,
+              isLoading: false,
+            });
+
+            return;
+          }
+
           const res = await fetch("/api/fetchLeagueData");
           const { k1, k2 } = await res.json();
           const curLeague = get().leagueId === "k1" ? k1 : k2;
@@ -40,6 +57,11 @@ export const useLeagueStore = create<LeagueStore>()(
         }
       },
       leagueId: "k1",
+      setLeagueId: (id: LeagueId) => {
+        const state = get();
+        const newData = id === "k1" ? state.k1Data : state.k2Data;
+        set({ leagueId: id, curLeagueData: newData });
+      },
       toggleLeagueId: () => {
         const state = get();
         const newId: LeagueId = state.leagueId === "k1" ? "k2" : "k1";
