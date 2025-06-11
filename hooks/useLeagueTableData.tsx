@@ -1,6 +1,6 @@
-import EndLabel from "@/components/LeagueSchedule/EndLabel";
-import ResultLabel from "@/components/LeagueSchedule/ResultLabel";
-import ScoreBoard from "@/components/LeagueSchedule/ScoreBoard";
+import EndLabel from "@/components/LeagueScheduleTable/EndLabel";
+import ResultLabel from "@/components/LeagueScheduleTable/ResultLabel";
+import ScoreBoard from "@/components/LeagueScheduleTable/ScoreBoard";
 import TeamLogoWithName from "@/components/TeamLogoWithName";
 import {
   flexColCenter,
@@ -185,6 +185,48 @@ function useLeagueTableData(schedule: Schedule[], teamName: string | null) {
                   [{row.audienceQty ? row.audienceQty.toLocaleString() : "-"}명]
                 </span>
               </div>
+            </td>
+          );
+        },
+      },
+      {
+        header: "중계정보",
+        cell: (info) => {
+          const row = info.row.original;
+          const bc = row.matchBC || "";
+
+          const [broadcaster, casterRaw, analystRaw] = bc
+            .split("|")
+            .map((s) => s.trim());
+
+          const caster = casterRaw?.replace("캐스터 :", "").trim();
+          const analyst = analystRaw
+            ?.replace("해설 :", "")
+            .trim()
+            ?.split("&emsp;")[0]
+            .trim();
+
+          return (
+            <td
+              className={tdClass(
+                "min-w-[150px]",
+                "border-r",
+                "border-gray-200"
+              )}
+            >
+              <div>[ {broadcaster} ]</div>
+              {caster && (
+                <div className={flexRowCenter("justify-center")}>
+                  <span className={smLabel()}>캐스터:</span> {caster}
+                </div>
+              )}
+              {analyst && (
+                <div className={flexRowCenter("justify-center")}>
+                  <span className={smLabel()}>해설:</span> {analyst}
+                </div>
+              )}
+              <br />
+              <div>[ COUPANGPLAY ]</div>
             </td>
           );
         },

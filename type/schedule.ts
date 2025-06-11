@@ -11,6 +11,7 @@ export interface Schedule {
   homeGoal: number;
   awayGoal: number;
   audienceQty: number;
+  matchBC: string;
   mainRefree: string;
   subRefree1: string;
   subRefree2: string;

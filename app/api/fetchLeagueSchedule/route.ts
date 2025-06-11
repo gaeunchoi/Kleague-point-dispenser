@@ -30,6 +30,7 @@ export async function POST() {
         homeGoal: sche.homeGoal,
         awayGoal: sche.awayGoal,
         audienceQty: sche.audienceQty,
+        matchBC: sche.matchBC,
         mainRefree: sche.refreeName1,
         subRefree1: sche.refreeName2,
         subRefree2: sche.refreeName3,
