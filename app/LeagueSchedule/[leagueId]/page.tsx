@@ -1,7 +1,7 @@
 import { LeagueId } from "@/data/teamLogo";
 import LeagueSchedule from "@/components/LeagueScheduleTable";
 import { flexColCenter, xlLabel } from "@/components/styles";
-import { getLeagueName } from "@/utils/leagueName";
+import { LEAGUE_LABELS } from "@/constants";
 
 async function LeagueSchedulePage(props: {
   params: Promise<{ leagueId: LeagueId }>;
@@ -13,7 +13,7 @@ async function LeagueSchedulePage(props: {
   return (
     <div className={flexColCenter("gap-4", "p-4")}>
       <div className={xlLabel()}>
-        {!teamName && `${getLeagueName(leagueId)} 전체 일정`}
+        {!teamName && `${LEAGUE_LABELS[leagueId]} 전체 일정`}
       </div>
       <LeagueSchedule leagueId={leagueId} teamName={teamName ?? null} />
     </div>
