@@ -9,6 +9,7 @@ import TeamLogos from "@/data/teamLogo";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/effect-coverflow";
+import { useEffect } from "react";
 
 function TeamSwiper() {
   const router = useRouter();
@@ -16,7 +17,7 @@ function TeamSwiper() {
 
   const handleTeamClick = (leagueId: number, teamName: string) => {
     router.push(
-      `/TeamView?leagueId=k${encodeURIComponent(
+      `/DetailTeamInfo?leagueId=k${encodeURIComponent(
         leagueId
       )}&teamName=${encodeURIComponent(teamName)}`
     );

@@ -42,7 +42,7 @@ function TeamLogoWithName({
         })}
         onClick={() => {
           router.push(
-            `/TeamView?leagueId=${myLeagueId}&teamName=${encodeURIComponent(
+            `/DetailTeamInfo?leagueId=${myLeagueId}&teamName=${encodeURIComponent(
               teamName
             )}`
           );
