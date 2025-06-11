@@ -25,7 +25,7 @@ function LeagueScheduleTable({ leagueId, teamName }: LeagueScheduleTableProps) {
 
   useEffect(() => {
     if (!schedule || schedule.length === 0) fetchData();
-  }, [leagueId, schedule]);
+  }, [leagueId, teamName]);
 
   const { data, columns } = useLeagueTableData(schedule, teamName);
 
