@@ -23,6 +23,15 @@ export const useScheduleStore = create<ScheduleStore>()(
       isLoading: false,
       fetchData: async () => {
         set({ isLoading: true });
+
+        const state = get();
+        if (state.k1Data.length > 0 || state.k2Data.length > 0) {
+          const curLeague =
+            state.leagueId === "k1" ? state.k1Data : state.k2Data;
+          set({ curLeagueSchedule: curLeague, isLoading: false });
+          return;
+        }
+
         try {
           const res = await fetch("/api/fetchLeagueSchedule", {
             method: "POST",
