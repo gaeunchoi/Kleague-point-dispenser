@@ -11,27 +11,46 @@ function SideBar() {
     setOpenSideBar((prev) => !prev);
   };
 
+  const handleOverlayClick = () => {
+    setOpenSideBar(false);
+  };
+
   return (
-    <div
-      className={cn(
-        "w-[200px]",
-        "p-4",
-        "fixed",
-        "top-0",
-        "left-0",
-        "h-full",
-        "transition-all",
-        "duration-300",
-        "z-50",
-        openSideBar && "bg-gray-100"
+    <>
+      {openSideBar && (
+        <div
+          className={cn(
+            "fixed",
+            "inset-0",
+            "bg-black",
+            "bg-opacity-30",
+            "z-40"
+          )}
+          onClick={() => {
+            handleOverlayClick();
+          }}
+        />
       )}
-    >
-      <SideBarHeader
-        isOpen={openSideBar}
-        onSwitchSideBarClick={handleSwitchSideBarClick}
-      />
-      {openSideBar && <SideBarContent />}
-    </div>
+      <div
+        className={cn(
+          "w-[200px]",
+          "p-4",
+          "fixed",
+          "top-0",
+          "left-0",
+          "transition-all",
+          "duration-300",
+          "z-50",
+          openSideBar && "bg-gray-100 h-full"
+        )}
+      >
+        <SideBarHeader
+          isOpen={openSideBar}
+          onSwitchSideBarClick={handleSwitchSideBarClick}
+        />
+        {openSideBar && <SideBarContent />}
+      </div>
+    </>
   );
 }
 
