@@ -58,6 +58,16 @@ function SideBarContent() {
           title="K리그2 순위"
           onClick={() => router.push("/LeagueRank/k2")}
         />
+
+        <SideBarLi
+          title="K리그1 전체 일정"
+          onClick={() => router.push("/LeagueSchedule/k2")}
+        />
+
+        <SideBarLi
+          title="K리그2 전체 일정"
+          onClick={() => router.push("/LeagueSchedule/k2")}
+        />
       </ul>
     </div>
   );
