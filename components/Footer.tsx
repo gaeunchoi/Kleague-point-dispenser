@@ -7,8 +7,8 @@ function Footer() {
       <div className="max-w-5xl mx-auto space-y-2">
         <div>© 2025 gaanii</div>
         <div>
-          본 서비스는 비상업적 용도로 제공되며, K리그 및 각 구단과는 어떠한
-          공식적인 제휴나 연관이 없습니다.
+          본 서비스는 웹 개발 학습용으로 개발된 서비스입니다. 비상업적 용도로
+          제공되며, K리그 및 각 구단과는 어떠한 공식적인 제휴나 연관이 없습니다.
         </div>
         <div>
           제공되는 데이터는 (사)한국프로축구연맹의 공식 데이터를 기반으로 하나,
@@ -24,6 +24,10 @@ function Footer() {
           데이터 출처:{" "}
           <a href="kleague.com" className={cn("text-blue-500")}>
             K리그 공식 홈페이지
+          </a>
+          &nbsp;| 문의:{" "}
+          <a href="mailto:gaeun1884@naver.com" className={cn("text-blue-500")}>
+            이메일
           </a>
         </div>
       </div>
