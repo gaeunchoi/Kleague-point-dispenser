@@ -17,7 +17,6 @@ import { LEAGUE_LABELS } from "@/constants";
 import SimpleStats from "./SimpleStats";
 import { useEffect, useState } from "react";
 import SimpleStatsLoading from "./SimpleStatsLoading";
-import Link from "next/link";
 
 function TeamInfoHeader() {
   const searchParams = useSearchParams();
@@ -43,9 +42,6 @@ function TeamInfoHeader() {
       >
         {loading || !myTeam ? (
           <div className={flexCol("w-full", "gap-3")}>
-            <Link href="/" className={smLabel("hover:text-blue-400")}>
-              ← 홈으로
-            </Link>
             <div className={flexRowCenter("w-full")}>
               <div
                 className={flexColCenter(
@@ -67,9 +63,6 @@ function TeamInfoHeader() {
           </div>
         ) : (
           <div className={flexCol("w-full", "gap-3")}>
-            <Link href="/" className={smLabel("hover:text-blue-400")}>
-              ← 홈으로
-            </Link>
             <div className={flexRow("justify-between", "w-full")}>
               <div className={flexRow()}>
                 <div
