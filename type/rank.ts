@@ -10,4 +10,5 @@ export interface Rank {
   lossGoal: number;
   gapGoal: number;
   gainPoint: number;
+  latestGameResult: string[];
 }

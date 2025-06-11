@@ -1,11 +1,11 @@
-import { Rank } from "@/type/rank";
 import { cn } from "@/utils/cn";
+import { SubStatProps } from "@/type/subStats";
 import CardSection from "../CardSection";
 import { xlLabel } from "../styles";
 import StatsInfo from "../StatsInfo";
 import ProgressBar from "../ProgressBar";
 
-function GoalPoint({ myTeam }: { myTeam: Rank | undefined }) {
+function GoalPoint({ myTeam }: SubStatProps) {
   const gainGoalPerGame =
     Math.floor(((myTeam?.gainGoal ?? 0) / (myTeam?.gameCnt ?? 0)) * 100) / 100;
   const lossGoalPerGame =

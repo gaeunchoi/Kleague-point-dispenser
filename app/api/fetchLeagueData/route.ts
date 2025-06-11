@@ -28,6 +28,13 @@ export const GET = async () => {
         lossGoal: team.lossGoal,
         gapGoal: team.gapCnt,
         gainPoint: team.gainPoint,
+        latestGameResult: [
+          team.game01,
+          team.game02,
+          team.game03,
+          team.game04,
+          team.game05,
+        ],
       }));
 
     const k1leagueRankInfo = getLeagueTeamRank(k1TeamRank || []);

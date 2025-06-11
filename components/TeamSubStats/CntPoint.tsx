@@ -1,10 +1,10 @@
 import { cn } from "@/utils/cn";
+import { SubStatProps } from "@/type/subStats";
 import CardSection from "../CardSection";
 import ProgressBar from "../ProgressBar";
-import { Rank } from "@/type/rank";
 import StatsInfo from "../StatsInfo";
 
-function CntPoint({ myTeam }: { myTeam: Rank | undefined }) {
+function CntPoint({ myTeam }: SubStatProps) {
   return (
     <div className={cn("grid", "sm:grid-cols-2", "md:grid-cols-4", "gap-4")}>
       <CardSection>

@@ -7,6 +7,7 @@ import GoalPoint from "./GoalPoint";
 import useLeagueData from "@/hooks/useLeagueData";
 import { LeagueId } from "@/data/teamLogo";
 import { useEffect, useState } from "react";
+import LatestGamePoint from "./LatestGamePoint";
 
 function TeamSubStats() {
   const searchParams = useSearchParams();
@@ -26,6 +27,7 @@ function TeamSubStats() {
     <div className={flexCol("gap-4", "w-full", "pt-4")}>
       <CntPoint myTeam={myTeam} />
       <GoalPoint myTeam={myTeam} />
+      <LatestGamePoint myTeam={myTeam} />
     </div>
   );
 }
