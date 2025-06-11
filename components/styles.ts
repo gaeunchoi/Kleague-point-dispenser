@@ -70,3 +70,16 @@ export const mainPageBtn = (...args: ClassValue[]) =>
     "transition",
     ...args
   );
+
+export const sideBarBtn = (...args: ClassValue[]) =>
+  cn(
+    "bg-none",
+    "border-none",
+    "text-[#333]",
+    "text-sm",
+    "cursor-pointer",
+    ...args
+  );
+
+export const sideBarLi = (...args: ClassValue[]) =>
+  cn("cursor-pointer", "font-bold", ...args);
