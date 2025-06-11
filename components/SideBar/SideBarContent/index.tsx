@@ -3,7 +3,7 @@ import { flexColCenter } from "../../styles";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import TeamList from "../TeamList";
-import { K1_TEAMS, K2_TEAMS } from "@/constants";
+import { K1_TEAM_NAME_MAP, K2_TEAM_NAME_MAP } from "@/constants";
 import SideBarLi from "./Li";
 
 function SideBarContent() {
@@ -12,9 +12,12 @@ function SideBarContent() {
   const [openK2, setOpenK2] = useState<boolean>(false);
 
   const handleTeamClick = (leagueId: number, teamName: string) => {
+    let shortName = teamName;
+    if (leagueId === 1) shortName = K1_TEAM_NAME_MAP[teamName];
+    if (leagueId === 2) shortName = K2_TEAM_NAME_MAP[teamName];
     router.push(
       `/DetailTeamInfo?leagueId=k${leagueId}&teamName=${encodeURIComponent(
-        teamName
+        shortName
       )}`
     );
   };
@@ -31,7 +34,7 @@ function SideBarContent() {
         {openK1 && (
           <TeamList
             leagueId={1}
-            teams={K1_TEAMS}
+            teams={Object.keys(K1_TEAM_NAME_MAP)}
             onTeamClick={handleTeamClick}
           />
         )}
@@ -43,7 +46,7 @@ function SideBarContent() {
         {openK2 && (
           <TeamList
             leagueId={2}
-            teams={K2_TEAMS}
+            teams={Object.keys(K2_TEAM_NAME_MAP)}
             onTeamClick={handleTeamClick}
           />
         )}
