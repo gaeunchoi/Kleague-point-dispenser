@@ -31,6 +31,16 @@ function SubStatsLoading() {
           </CardSection>
         ))}
       </div>
+      <div className={cn("grid", "sm:grid-cols-1", "md:grid-cols-2", "gap-4")}>
+        <CardSection>
+          <Skeleton height={100} borderRadius={12} />
+        </CardSection>
+        <CardSection
+          title={<Skeleton width={100} height={28} borderRadius={12} />}
+        >
+          <Skeleton height={48} borderRadius={12} className="mt-4" />
+        </CardSection>
+      </div>
     </div>
   );
 }
