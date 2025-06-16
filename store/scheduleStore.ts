@@ -1,7 +1,7 @@
 import { LeagueId } from "@/data/teamLogo";
 import { Schedule } from "@/type/schedule";
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { createJSONStorage, persist } from "zustand/middleware";
 
 type ScheduleStore = {
   k1Data: Schedule[];
@@ -60,6 +60,7 @@ export const useScheduleStore = create<ScheduleStore>()(
     }),
     {
       name: "schedule-store",
+      storage: createJSONStorage(() => sessionStorage),
     }
   )
 );
