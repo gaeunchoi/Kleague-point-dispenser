@@ -61,7 +61,7 @@ function SideBarContent() {
 
         <SideBarLi
           title="K리그1 전체 일정"
-          onClick={() => router.push("/LeagueSchedule/k2")}
+          onClick={() => router.push("/LeagueSchedule/k1")}
         />
 
         <SideBarLi
