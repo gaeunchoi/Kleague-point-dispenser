@@ -194,8 +194,10 @@ function useLeagueTableData(schedule: Schedule[], teamName: string | null) {
         cell: (info) => {
           const row = info.row.original;
           const bc = row.matchBC || "";
+          const bcList = bc.split("&emsp;").map((s) => s.trim());
 
-          const [broadcaster, casterRaw, analystRaw] = bc
+          const [mainBCBlock, ...extraBCs] = bcList;
+          const [broadcaster, casterRaw, analystRaw] = mainBCBlock
             .split("|")
             .map((s) => s.trim());
 
@@ -225,8 +227,12 @@ function useLeagueTableData(schedule: Schedule[], teamName: string | null) {
                   <span className={smLabel()}>해설:</span> {analyst}
                 </div>
               )}
+
               <br />
-              <div>[ COUPANGPLAY ]</div>
+
+              {extraBCs.map((bc, idx) => (
+                <div key={idx}>[ {bc} ]</div>
+              ))}
             </td>
           );
         },
