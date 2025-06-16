@@ -41,6 +41,7 @@ function SideBar() {
           "transition-all",
           "duration-300",
           "z-50",
+          "overflow-y-auto",
           openSideBar && "bg-gray-100 h-full"
         )}
       >
