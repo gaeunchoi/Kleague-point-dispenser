@@ -19,6 +19,7 @@ export async function POST() {
     const getLeagueScheduleList = (leagueSchedule: any[]): Schedule[] =>
       leagueSchedule.map((sche: any) => ({
         leagueId: sche.leagueId,
+        gameId: sche.gameId,
         roundId: sche.roundId,
         gameDate: sche.gameDate,
         weekdayShort: sche.weekdayShort,

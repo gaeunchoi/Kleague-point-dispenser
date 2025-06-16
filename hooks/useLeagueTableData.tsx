@@ -8,6 +8,7 @@ import {
   smLabel,
   tdClass,
 } from "@/components/styles";
+import { awayAudienceQty } from "@/data/awayAudienceQty";
 import { GroupsByRDT } from "@/type/group";
 import { Schedule } from "@/type/schedule";
 import { ColumnDef } from "@tanstack/react-table";
@@ -171,6 +172,10 @@ function useLeagueTableData(schedule: Schedule[], teamName: string | null) {
         header: "장소/관중수",
         cell: (info) => {
           const row = info.row.original;
+          const leagueId = row.leagueId === 1 ? "k1" : "k2";
+          const awayQty = awayAudienceQty[leagueId]?.[row.gameId];
+          const homeQty = row.audienceQty - awayQty;
+
           return (
             <td
               className={tdClass(
@@ -182,7 +187,12 @@ function useLeagueTableData(schedule: Schedule[], teamName: string | null) {
               <div className={flexColCenter("justify-center", "gap-1")}>
                 <span>{row.fieldName}</span>
                 <span className={smLabel()}>
-                  [{row.audienceQty ? row.audienceQty.toLocaleString() : "-"}명]
+                  [H: {row.audienceQty ? homeQty.toLocaleString() : "-"}
+                  명]
+                </span>
+                <span className={smLabel()}>
+                  [A: {awayQty ? awayQty.toLocaleString() : "-"}
+                  명]
                 </span>
               </div>
             </td>

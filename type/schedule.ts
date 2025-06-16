@@ -1,6 +1,7 @@
 export interface Schedule {
   leagueId: number;
   roundId: number;
+  gameId: number;
   gameDate: string;
   weekdayShort: string;
   gameTime: string;
